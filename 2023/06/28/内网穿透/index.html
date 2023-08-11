@@ -1,0 +1,208 @@
+<!DOCTYPE html><html lang="zh_CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>B站最详细内网穿透原理，看了包懂，全是干货！ | xyl的个人博客</title><meta name="author" content="xyl"><meta name="copyright" content="xyl"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="以下的内容不涉及最基础的通过一个中央服务器转发的方式，因为这种方式我不说诸位也应该能理解。  在这篇文章写的时候我仍然对当今的内网穿透技术的成熟度不算太了解，目前基于 UDP 的内网穿透技术可以很确定的说是成熟了，但是基于 TCP 的内网穿透是还存在一些问题的，由于 TCP 协议的复杂，导致很多内容无法和 UDP 雷同，目前网上和书籍能用来参考的资料也较少，所以以下谈及的所有技术皆是在UDP传输">
+<meta property="og:type" content="article">
+<meta property="og:title" content="B站最详细内网穿透原理，看了包懂，全是干货！">
+<meta property="og:url" content="https://xyiling.github.io/2023/06/28/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/index.html">
+<meta property="og:site_name" content="xyl的个人博客">
+<meta property="og:description" content="以下的内容不涉及最基础的通过一个中央服务器转发的方式，因为这种方式我不说诸位也应该能理解。  在这篇文章写的时候我仍然对当今的内网穿透技术的成熟度不算太了解，目前基于 UDP 的内网穿透技术可以很确定的说是成熟了，但是基于 TCP 的内网穿透是还存在一些问题的，由于 TCP 协议的复杂，导致很多内容无法和 UDP 雷同，目前网上和书籍能用来参考的资料也较少，所以以下谈及的所有技术皆是在UDP传输">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2023-06-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-06-28T09:33:40.161Z">
+<meta property="article:author" content="xyl">
+<meta property="article:tag" content="内网穿透、NAT">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://xyiling.github.io/2023/06/28/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'B站最详细内网穿透原理，看了包懂，全是干货！',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2023-06-28 17:33:40'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">37</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="xyl的个人博客"><span class="site-name">xyl的个人博客</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">B站最详细内网穿透原理，看了包懂，全是干货！</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-06-27T16:00:00.000Z" title="Created 2023-06-28 00:00:00">2023-06-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-06-28T09:33:40.161Z" title="Updated 2023-06-28 17:33:40">2023-06-28</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="B站最详细内网穿透原理，看了包懂，全是干货！"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p> 以下的内容不涉及最基础的通过一个中央服务器转发的方式，因为这种方式我不说诸位也应该能理解。</p>
+<p> 在这篇文章写的时候我仍然对当今的内网穿透技术的成熟度不算太了解，目前基于 UDP 的内网穿透技术可以很确定的说是成熟了，但是基于 TCP 的内网穿透是还存在一些问题的，由于 TCP 协议的复杂，导致很多内容无法和 UDP 雷同，目前网上和书籍能用来参考的资料也较少，所以以下谈及的所有技术皆是在UDP传输的基础上。</p>
+<p>  既然要谈内网穿透，那么NAT就是不可避免的话题，因为纯粹的NAT技术已经是多年前使用的，现在绝大多数使用的都是NAPT技术，所以下文所说的NAT皆指代NAPT。</p>
+<p>  关于NAT技术的基础在这里我不想过多的赘述，无非就是将外网的ip及端口和内网的ip及端口建立一个映射关系，如果之前没有相应的了解，可以先参考我这个视频：</p>
+<p>端口映射到底是什么原理，内网穿透又是怎么做到的，怎么实现局域网联机，在外地如何优雅的访问家里的电脑</p>
+<p>  嫌弃30分钟太长的话，也可以自行阅读这篇博客</p>
+<p>  <a target="_blank" rel="noopener" href="https://blog.51cto.com/20100823/401704">https://blog.51cto.com/20100823/401704</a></p>
+<p>  关于NAT，我个人认为，这篇文章的重点应该在于NAT的类型，NAT可以分为锥型和对称型，其中锥型又可以分为完全锥型和限制型锥型，限制型锥型又可分为ip限制型锥型和端口限制型锥型，画成图的话大概就是如下的样子。</p>
+<p><img src="https://i0.hdslb.com/bfs/article/a3b6b98095ac300e7d135dd1a6f1f94c1664e75d.png@1256w_708h_!web-article-pic.webp" alt="img"></p>
+<p>  所以如果去除分类的话，NAT的类型只有：对称型，完全锥型，ip限制型锥型，端口限制型锥型，也就是下图红圈圈起来的地方，下面我们来详细讲一讲这几种不同的分类。</p>
+<p><img src="https://i0.hdslb.com/bfs/article/08837eca4944821d3c58f3458e95280f2087e0da.png@!web-article-pic.webp" alt="img"></p>
+<p>假定：</p>
+<p>公网server1：ip是1.1.1.1，监听端口是1111</p>
+<p>公网server2：ip是2.2.2.2，监听端口是2222</p>
+<p>NAT网关：ip是3.3.3.3</p>
+<p>NAT内部需要穿透的电脑A：内网 ip 是：192.168.0.2</p>
+<p>此刻，A（192.168.0.2:100）已经通过NAT网关（3.3.3.3:200）和server1（1.1.1.1:1111）建立了链接</p>
+<p><strong>完全锥型</strong>：如果在 NAT 网关已经建立了一个 NAT 映射，那么任何外网的机器都可以通过这个映射来访问内网的电脑，例如此刻 server2 如果想和 A 建立通信，那么只需要往 3.3.3.3:200 发送数据包，NAT 网关就会接收数据包并将其转发到内部的 192.168.0.2:100 上。</p>
+<p>  如果 A 主动使用同样的端口去和不同的服务器或和相同的服务器，不同的端口建立连接时，NAT的映射也会使用同样的端口，例如A若是想用 100 端口和 server2 建立连接，NAT网关仍然会把3.3.3.3:200映射到192.168.0.2:100上，而不是重新选择一个端口映射到100，如果这里不能理解，那就先往下看，等到下面介绍对称型NAT时，结合着对称型NAT看即可。</p>
+<p>  <strong>在所有锥型网络中这一点都是一样的，这也正是锥型网络的特征，下面的两种锥型网络也是一样，虽然在此处声明后，不会在下面重新赘述一遍，但是请读者切记这一点。</strong></p>
+<p><strong>ip限制型锥型</strong>：如果在 NAT 网关已经建立了一个 NAT 映射，那么只有与其建立映射的 ip 才能通过NAT访问内网的电脑。例如此刻如果server1想通过1112这个端口和A再建立一个连接，那么只需要往3.3.3.3:200发送数据，NAT会正常的将其转发到192.168.0.2:100，但是如果此刻server2想和A建立连接，因为server2在此前并未和A建立连接，所以如果server2给3.3.3.3:200发送数据的话，NAT网关会将来自server2的数据包直接丢弃。</p>
+<p><strong>端口限制型锥型</strong>：这个类型虽然叫端口限制型，但其实限制的不只是端口，ip也同样限制，可以理解为在ip限制型锥型的基础上，再进行端口的限制，也就是说现在不只对ip有需求，连端口都有需求，如果按照上面的例子，此刻如果server还想通过1112端口和A建立连接就不行了，因为限制了端口，只有从1.1.1.1:1111发来的数据NAT网关才会处理。</p>
+<p><strong>对称型NAT</strong>：可以看出来，上述的三个类型限制是越来越严格，按照这个思路，对称型NAT的限制会更加严格。首先，对称型NAT和端口限制型锥型是一样的，即对ip和端口都有限制，只有和其建立连接的ip和端口向其发送数据才不会被丢弃。</p>
+<p>  我们上述说了，锥型网络的特征是如果A使用了100端口和外网的另一台服务器通信，那么NAT网关和其绑定的端口依然是200，一个端口和外面的诸多服务器进行通信，这也正是锥型这种叫法的来源，但是对称型NAT并不是这样。</p>
+<p>  对称型NAT在A主动使用相同的端口去和不同服务器或和相同的服务器不同的端口建立连接时，NAT网关会给其重新分配一个端口。</p>
+<p>  例如，我们在最开始的时候说，A（192.168.0.2:100）已经通过NAT网关（3.3.3.3:200）和server1（1.1.1.1:1111）建立了链接，此时如果A（192.168.0.2:100）想和server2（2.2.2.2:2222）建立连接的话，如果使用锥型NAT，那么这个NAT网关会继续使用之前建立的NAT映射（3.3.3.3:200映射到192.168.0.2:100），而如果现在使用对称型NAT的话，NAT网关会再随机分配一个端口（例如300），建立一个映射（3.3.3.3:300映射到192.168.0.2:100），注意，此时NAT网关中存在两条映射规则，分别是：<strong>3.3.3.3:200映射到192.168.0.2:100</strong>和<strong>3.3.3.3:300映射到192.168.0.2:100，</strong>也就是说，此刻server1是和3.3.3.3:200进行通信，server2是和3.3.3.3:300进行通信，但是实际上，经过NAT网关的转发后，他们的数据包，最终都被192.168.0.2:100接收。</p>
+<p>  需要注意的是，<strong>内网电脑A始终都是通过100这个端口和外界通信的，而这两条映射规则则是NAT网关建立的，所以电脑A并不知道200和300这个端口，它始终认为自己就是通过100这个端口和外界通信，在外界的两个server来看，它们也并不知道自己是在和主机A通信，它们认为它们在和NAT网关（3.3.3.3）的不同端口进行通信。</strong></p>
+<p>  我们知道，内网穿透的作用是将两台处于NAT中的主机连接，所以上述介绍了四种NAT的类型，如果对其进行两两组合，共有10种组合方式。事实上，不同的组合方式在进行穿透时的方法也不同，甚至存在两种组合方式无法进行内网穿透（当然，如果全程用一个服务器进行转发自然是可以的，但是我们这里不考虑这种方法，另外目前有一些方式也可以实现这两种的内网穿透，只不过目前还不成熟，成功率较低，事实上不只是目前，我个人认为以后也不会成熟，因为这两种组合无法穿透是nat在设计上就存在的逻辑问题，或者说nat在设计之初就没有考虑这两种的穿透问题），下图将这些组合以及是否可以穿透列了出来。</p>
+<p><img src="https://i0.hdslb.com/bfs/article/0ad51c663a555bc5c787d662648d91d94c1f0cb6.png@1256w_724h_!web-article-pic.webp" alt="img"></p>
+<p>  内网穿透的思路有三种，所有可以进行内网穿透的的组合都可以基于这三种方法或基于这三种方法稍微拓展来实现内网穿透，下面我们讲讲这三种方法。</p>
+<p><strong>准备工作</strong>：内网穿透是使两个处于NAT中的网络进行连接，所以假设其中一个NAT网关是A，另一个NAT网关是B。另外内网穿透都需要有一个中心服务器来帮助，A和B都需要先连接到这台中心服务器，这里假定中心服务器的名字是server1，所以大致上拓扑应该是这样的。</p>
+<p><img src="https://i0.hdslb.com/bfs/article/c91ef56c8e4802f5af02c6a3335cef253fca8b00.png@1256w_598h_!web-article-pic.webp" alt="img">临时画的，画错了右边的主机应该是主机B</p>
+<p>第一种：完全锥型NAT和完全锥型NAT进行穿透</p>
+<p>  假设A和B都是完全锥型NAT，在A和B都连接到server1后，A和B都可以借助server1的转发互相发送消息，那么此刻A和B就可以知道对方的公网ip，以及对方和server1连接的时候，使用的端口是什么（假设是100），因为两者和server1进行通信的端口已经进行了NAT映射（不然怎么通信呢），所以二者的100端口其实已经完成映射，又因为二者都在完全锥型NAT下，此刻A只需要直接给B的100端口发送建立连接的请求，B给A的100端口回复同意建立连接的请求，二者即可建立UDP连接（当然UDP连接建立要比这复杂点，不过本文重点不在于如何建立UDP连接）</p>
+<p>第二种：ip限制型NAT和ip限制型NAT进行穿透</p>
+<p>  假设A和B都是ip限制型NAT，在A和B都连接到server1后，A和B都可以借助server1的转发互相发送消息，A会先发送一个UDP请求（假设自己的端口用100，目标端口用200）到B的公网ip上，理论上来说，因为B的NAT网关中，200端口没有建立NAT映射，所以这个数据包会被丢弃，但是在A发送给B的UDP请求后，A会通过server1给B发送一个邀请，邀请B也发送一个UDP请求给A（此刻B自己用的端口是200，目标端口是100），<strong>注意，在B收到来自A的UDP请求后，虽然A的数据包被B丢弃了，但是此刻，网关A暂时的建立了一个NAT映射，等待B返回的信息，虽然数据包已经被丢弃了，但是A不知道，所以A会稍微等一会B。这时，B收到了A的邀请，给A发送了一个建立连接的请求，此刻A的NAT网关恰巧暂时建立了NAT映射，所以A就可以收到B的UDP请求，接着A会给B发送一个同意建立连接的请求，因为此刻B刚发完请求在等A的回信，所以B的NAT网关也会暂时的建立一个NAT映射，所以A同意建立连接的请求就不会被B的NAT网关丢弃，最终，二者就建立了一个稳定的UDP连接。</strong></p>
+<p>第三种：端口限制型NAT和端口限制型NAT进行穿透</p>
+<p>  原理和第二种其实差不多。</p>
+<p>  借助这三种思想，我们就可以完成不需要服务器一直进行中转的内网穿透，那么为什么对称型NAT不能使用“ip限制型NAT和ip限制型NAT进行穿透”的思想和对称型NAT穿透呢。</p>
+<p>  仔细观察一下，在第二种方法中，A邀请B给其发送一个UDP请求，在邀请的信息中，A指明了B的UDP请求的目标端口，因为在锥型NAT中，主机A的一个端口和NAT网关的映射是固定的，所以主机A可以通过server1知道自己给B发送请求是打开的端口是哪一个，也可以知道B给自己发送请求是打开的端口是哪一个，但是当换到对称NAT中时，由于一个连接对应NAT网关上的一个端口，所以主机A无法确定自己通过哪一个端口给B发信息，同样无法确定B会通过哪一个端口给自己发信息，所以二者无法建立连接。</p>
+<p>  那么端口限制型又为什么不能和对称型进行穿透呢，因为端口限制型对端口存在要求，但是我们无法确定对称型中分配的端口是哪一个，所以无法建立通信</p>
+<p>  想让二者能建立通信，目前已知较好的的方法是让处于端口限制型NAT中的电脑和对称型中的电脑建立65535个UDP连接，由于65535包含了全部的端口号，所以总有一个端口是对的。但是这样一来就在一瞬间占用了几乎所有的端口，这可能会导致对称型中的电脑来不及处理正常的TCP连接，并且会占用大量资源，而且连接的成功率也非常的低，所以我们通常认为二者不能进行穿透。</p>
+<p>  最后，想必各位关心的是自己的网络处于哪种NAT，目前来看的话，家里的路由器（包括办宽带时送的光猫），使用的都是完全锥型NAT，但是上层的机房为了公共安全，使用的一般都是对称NAT，也就说是我们绝大多数人使用的都是对称NAT，所以想要进行内网穿透还是非常困难的。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="https://xyiling.github.io">xyl</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://xyiling.github.io/2023/06/28/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">https://xyiling.github.io/2023/06/28/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E3%80%81NAT/">内网穿透、NAT</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/06/28/git%E5%91%BD%E4%BB%A4%E8%BF%9B%E9%98%B6/" title="git 进阶操作"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">git 进阶操作</div></div></a></div><div class="next-post pull-right"><a href="/2023/06/28/%E6%A1%86%E6%9E%B6%E6%80%BB%E7%BB%93%E2%80%94%E2%80%94%E6%B5%81%E7%A8%8B%E5%92%8C%E4%BD%BF%E7%94%A8/" title="框架总结-流程和使用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">框架总结-流程和使用</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">xyl</div><div class="author-info__description">我不是大佬，有错误烦请指出，轻喷，谢谢！</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">37</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/08/08/JavaEE%E6%80%BB%E7%BB%93/" title="JavaEE总结">JavaEE总结</a><time datetime="2023-08-07T16:00:00.000Z" title="Created 2023-08-08 00:00:00">2023-08-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/08/08/JVM/" title="jvm笔记">jvm笔记</a><time datetime="2023-08-07T16:00:00.000Z" title="Created 2023-08-08 00:00:00">2023-08-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/08/08/arch-%E4%B8%BB%E5%AD%98/" title="计算机组成原理——内存">计算机组成原理——内存</a><time datetime="2023-08-07T16:00:00.000Z" title="Created 2023-08-08 00:00:00">2023-08-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/08/08/arch-%E6%8C%87%E4%BB%A4%E9%9B%86/" title="计算机组成原理——指令集">计算机组成原理——指令集</a><time datetime="2023-08-07T16:00:00.000Z" title="Created 2023-08-08 00:00:00">2023-08-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/08/08/arch-%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA/" title="计算机组成原理——数据的表示">计算机组成原理——数据的表示</a><time datetime="2023-08-07T16:00:00.000Z" title="Created 2023-08-08 00:00:00">2023-08-08</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By xyl</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
