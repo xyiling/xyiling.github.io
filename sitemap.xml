@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://github.com/xyiling/xyiling.github.io/2025/04/16/ostep%E7%AC%94%E8%AE%B0/</loc>
+    
+    <lastmod>2025-04-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://github.com/xyiling/xyiling.github.io/2024/04/26/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5/</loc>
     
     <lastmod>2025-04-16</lastmod>
@@ -30,15 +39,6 @@
   
   <url>
     <loc>http://github.com/xyiling/xyiling.github.io/2023/07/08/MySQL45%E8%AE%B2%E7%AC%94%E8%AE%B0/</loc>
-    
-    <lastmod>2025-04-16</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://github.com/xyiling/xyiling.github.io/2025/04/16/ostep%E7%AC%94%E8%AE%B0/</loc>
     
     <lastmod>2025-04-16</lastmod>
     
@@ -77,15 +77,6 @@
     <loc>http://github.com/xyiling/xyiling.github.io/2024/03/11/ieee754%E8%BD%AC%E6%8D%A2%E7%A4%BA%E4%BE%8B/</loc>
     
     <lastmod>2024-03-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://github.com/xyiling/xyiling.github.io/2025/04/16/custom/config/index/</loc>
-    
-    <lastmod>2024-03-03</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
