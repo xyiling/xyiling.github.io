@@ -1,0 +1,220 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>linux内核启动流程 | 流光不共我的小屋</title><meta name="author" content="xyiling"><meta name="copyright" content="xyiling"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="linux内核启动流程一、硬件自检 电源自检  按下开关键后，电源启动，计算机会进行电源自检POST，主要是检查电源是否连接正常、电源开关是否正常、电源输出是否稳定，防止损坏计算机的硬件设备。CPU状态：实模式，CS&#x3D;0xFFFF;IP&#x3D;0x0000，对应实际物理地址0xFFFF0(CS左移4位+IP)，指向装有BIOS的ROM  BIOS自检  电源自检通过，主板通电，读取ROM存放的BIOS程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux内核启动流程">
+<meta property="og:url" content="http://xyiling.github.io/2023/12/19/linux%E5%86%85%E6%A0%B8%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/index.html">
+<meta property="og:site_name" content="流光不共我的小屋">
+<meta property="og:description" content="linux内核启动流程一、硬件自检 电源自检  按下开关键后，电源启动，计算机会进行电源自检POST，主要是检查电源是否连接正常、电源开关是否正常、电源输出是否稳定，防止损坏计算机的硬件设备。CPU状态：实模式，CS&#x3D;0xFFFF;IP&#x3D;0x0000，对应实际物理地址0xFFFF0(CS左移4位+IP)，指向装有BIOS的ROM  BIOS自检  电源自检通过，主板通电，读取ROM存放的BIOS程">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://xyiling.github.io/img/butterfly-icon.png">
+<meta property="article:published_time" content="2023-12-18T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-08-05T00:25:43.480Z">
+<meta property="article:author" content="xyiling">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://xyiling.github.io/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "linux内核启动流程",
+  "url": "http://xyiling.github.io/2023/12/19/linux%E5%86%85%E6%A0%B8%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/",
+  "image": "http://xyiling.github.io/img/butterfly-icon.png",
+  "datePublished": "2023-12-18T16:00:00.000Z",
+  "dateModified": "2025-08-05T00:25:43.480Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "xyiling",
+      "url": "http://xyiling.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://xyiling.github.io/2023/12/19/linux%E5%86%85%E6%A0%B8%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'linux内核启动流程',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">流光不共我的小屋</span></a><a class="nav-page-title" href="/"><span class="site-name">linux内核启动流程</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">linux内核启动流程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-12-18T16:00:00.000Z" title="发表于 2023-12-19 00:00:00">2023-12-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-08-05T00:25:43.480Z" title="更新于 2025-08-05 08:25:43">2025-08-05</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="linux内核启动流程"><a href="#linux内核启动流程" class="headerlink" title="linux内核启动流程"></a>linux内核启动流程</h1><h2 id="一、硬件自检"><a href="#一、硬件自检" class="headerlink" title="一、硬件自检"></a>一、硬件自检</h2><ol>
+<li>电源自检</li>
+</ol>
+<p>按下开关键后，电源启动，计算机会进行电源自检POST，主要是检查<strong>电源是否连接正常</strong>、<strong>电源开关是否正常</strong>、<strong>电源输出是否稳定</strong>，防止损坏计算机的硬件设备。<br>CPU状态：实模式，CS=0xFFFF;IP=0x0000，对应实际物理地址0xFFFF0(CS左移4位+IP)，指向装有BIOS的ROM</p>
+<ol start="2">
+<li>BIOS自检</li>
+</ol>
+<p>电源自检通过，主板通电，读取ROM存放的BIOS程序，进行BIOS自检。BIOS负责管理和控制计算机硬件设备，本质上是一组”程序代码”。</p>
+<p>BIOS作为CPU要进行处理的第一个“可执行程序”，也就是第一个“开机启动项”。其程序代码事先被刷入集成在主板的ROM芯片中，主要保存着系统设置程序、基本输入输出程序、开机上电自检程序和系统启动自举程序等</p>
+<blockquote>
+<p>ROM: 只读存储器，不需要供电也可保持数据不丢失。这点特性和内存有着鲜明的对比<br>现在一般用Flash闪存来代替ROM，由于ROM写入后就不能修改，改用Flash闪存后，既方便又能用专用程序即可修改其中代码</p>
+</blockquote>
+<p>BIOS自检内容：</p>
+<p>硬件自检-&gt;初始化</p>
+<p>自检对象：处理器、内存、硬盘、显卡、声卡、键盘、鼠标、显示器等</p>
+<ol start="3">
+<li>选择引导设备、读取mbr并执行</li>
+</ol>
+<p>从第一设备中读取MBR，并且将程序放在0x7c00的内存地址</p>
+<blockquote>
+<p>磁盘：每个盘面划分成了一圈一圈的磁道，最外圈是0磁盘。然后每个磁盘又划分为了一个个小块，小块叫做扇区。扇区大小固定，是512个字节。</p>
+</blockquote>
+<blockquote>
+<p>MBR在0盘0道0扇区上(最外层磁盘的最外围磁道的第一个扇区)，也就是该储存设备的第一个扇区(大小512个字节)。存放用于启动操作系统的引导程序代码，引导操作系统的启动</p>
+</blockquote>
+<p>mbr由三个部分组成：</p>
+<ul>
+<li><p>第一部分446个字节：主引导程序boot loader</p>
+</li>
+<li><p>第二部分64个字节：记录分区表</p>
+<p>  硬盘可以分区，每个区可以安装不同的os，mbr必须知道将控制权转交给哪个操作系统。分区表的长度只有64个字节，里面又分成四项，每项16个字节。所以，一个硬盘最多只能分四个一级分区，又叫做”主分区”。</p>
+<p>  每个主分区的16个字节，由6个部分组成：</p>
+<ul>
+<li>第1个字节：如果为0x80，就表示该主分区是激活分区，控制权要转交给这个分区。四个主分区里面只能有一个是激活的。</li>
+<li>第2-4个字节：主分区第一个扇区的物理位置（柱面、磁头、扇区号等等）。</li>
+<li>第5个字节：主分区类型。</li>
+<li>第6-8个字节：主分区最后一个扇区的物理位置。</li>
+<li>第9-12字节：该主分区第一个扇区的逻辑地址。</li>
+<li>第13-16字节：主分区的扇区总数，决定了这个主分区的长度，一个主分区的扇区总数最多不超过2的32次方。</li>
+</ul>
+<p>  当主引导程序将硬盘的第一个扇区中读取到的操作系统引导程序代码(512 个字节的内容)，加载(原封不动地复制)到计算机内存0x7c00这个位置。这个过程需要依靠硬盘控制器和指令集来完成。</p>
+</li>
+<li><p>第三个部分占2个字节：主引导记录的签名（0x55和0xAA）,如果这512字节的最后两个字节是0x55和0xAA，表明这个设备可以用于启动；如果不是，表明设备不能用于启动，控制权于是被转交给”启动顺序”中的下一个设备。如果到最后还是没找到符合条件的，直接报出一个无启动区的error。</p>
+</li>
+</ul>
+<h4 id="0x7c00是什么地址？"><a href="#0x7c00是什么地址？" class="headerlink" title="0x7c00是什么地址？"></a>0x7c00是什么地址？</h4><p>0x7C00这个地址，第一次出现于IBM PC 5150电脑，IBM PC 5150是x86（32位）IBM PC/AT系列的老祖宗，使用了intel 8088芯片，后人一直沿用这个地址以保持兼容。</p>
+<p>IBM PC 5150电脑的操作系统是86-DOS，它最少需要32KB的内存，32KB=32 * 1024B = 32768B = 0x8000B, 由于内存地址是从0x0000开始的，32位末地址是0x8000 -1=0x7FFF所以32KB的内存地址是0x0000～0x7FFF</p>
+<p>现在又知主引导记录需要512字节，其本身引导程序的堆栈/数据区域也至少需要512 字节</p>
+<p>0x7FFF -512 -512 + 1=0x7C00，这样就得出0x7C00这个地址了。</p>
+<p>计算机启动会后，内存布局如下：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">+——————— 0×0</span><br><span class="line">| Interrupts vectors（中断向量表）</span><br><span class="line">+——————— 0×400</span><br><span class="line">| BIOS data area（BIOS的数据区域）</span><br><span class="line">+——————— 0×5??</span><br><span class="line">| OS load area（操作系统加载区域）</span><br><span class="line">+——————— 0x7C00</span><br><span class="line">| Boot sector（引导区域）</span><br><span class="line">+——————— 0x7E00</span><br><span class="line">| Boot data/stack（引导数据/堆栈）</span><br><span class="line">+——————— 0x7FFF</span><br><span class="line">| (not used) </span><br><span class="line">+——————— (…)</span><br></pre></td></tr></tbody></table></figure>
+
+<ol start="5">
+<li>启动操作系统</li>
+</ol>
+<p>跳转到c程序或是汇编程序，这时候就是操作系统的代码范畴了</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://xyiling.github.io">xyiling</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://xyiling.github.io/2023/12/19/linux%E5%86%85%E6%A0%B8%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/">http://xyiling.github.io/2023/12/19/linux%E5%86%85%E6%A0%B8%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://xyiling.github.io" target="_blank">流光不共我的小屋</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2023/12/19/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" title="消息队列思想和实现"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">消息队列思想和实现</div></div><div class="info-2"><div class="info-item-1">消息队列一、基本结构 producer：消息生产者，多个，负责将消息发送到消息队列 broker：消息处理中心，包含多个消息队列，负责存储消息、确认、重试等 consumer：消息消费者，从消息队列获取消息  二、消息队列模式 点对点模式  多个producer向同一个broker的同一个queue发送消息，一个具体的消息只能由一个consumer消费  发布/订阅模式  单个消息可以被多个consumer消费 三、RocketMQ简要概述RocketMQ 是阿里开源的消息中间件，纯Java开发，高性能、高可靠、高实时、适合大规模分布式系统应用。 RocketMQ 思路起源于 Kafka，对消息的可靠传输及事务性做了优化 3.1 重要概念 Name 服务器（NameServer）：充当注册中心，类似 Kafka 的 Zookeeper。 Broker: 一个独立的 RocketMQ 服务器就被称为 broker，broker 接收来自生产者的消息，为消息设置偏移量。 主题（Topic）：消息的第一级类型，一条消息必须有一个 Topic。 子主题（Tag）：消息的第二级类型，同一业...</div></div></div></a><a class="pagination-related" href="/2023/12/12/python%E5%85%A5%E9%97%A8%E8%AF%AD%E6%B3%95/" title="python入门语法"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">python入门语法</div></div><div class="info-2"><div class="info-item-1">一、类的定义_foo，单下划线开头： protected 类型的变量或方法，只允许其本身与子类进行访问，不能用于 from module import *__foo，双下划线：私有类型(private)的变量或方法, 只允许这个类本身进行访问foo，正常的 public 变量def __foo__(): # 使用__xx__定义的一般是保留的，如__init()__，与c的关键字类似，不建议在日常业务或使用中写这种风格的代码 1234567class TClass:    _foo = 0       # 单下划线开头： protected 类型的变量或方法，只允许其本身与子类进行访问，不能用于 from module import *    __foo = 0      # 双下划线：私有类型(private)的变量或方法, 只允许这个类本身进行访问    foo = 0		   # 正常的 public 变量    def __foo__(): # 使用__xx__定义的一般是保留的，如__init()__，与c的关键字类似，不建议在日常业务或使用中写这种风格的代码     ...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">xyiling</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xyiling"><i class="fab fa-github"></i><span>加个关注吧</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">千里之行始于足下</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#linux%E5%86%85%E6%A0%B8%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">linux内核启动流程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%A1%AC%E4%BB%B6%E8%87%AA%E6%A3%80"><span class="toc-number">1.1.</span> <span class="toc-text">一、硬件自检</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#0x7c00%E6%98%AF%E4%BB%80%E4%B9%88%E5%9C%B0%E5%9D%80%EF%BC%9F"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">0x7c00是什么地址？</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/08/03/%E6%A2%A6%E6%83%B3%E5%90%AF%E8%88%AA/" title="梦想启航">梦想启航</a><time datetime="2025-08-03T14:37:00.000Z" title="发表于 2025-08-03 22:37:00">2025-08-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/08/03/linux-0.11%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/" title="无标题">无标题</a><time datetime="2025-08-03T12:32:57.353Z" title="发表于 2025-08-03 20:32:57">2025-08-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/19/%E6%B5%85%E5%85%A5%E6%B5%85%E5%87%BA%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="浅入浅出设计模式">浅入浅出设计模式</a><time datetime="2025-07-19T15:01:02.000Z" title="发表于 2025-07-19 23:01:02">2025-07-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/19/%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84%E5%85%A8%E6%A0%88%E9%A1%B9%E7%9B%AE%E5%BA%94%E8%AF%A5%E6%98%AF%E6%80%8E%E4%B9%88%E6%A0%B7%E7%9A%84%EF%BC%9F/" title="一个完整的全栈项目应该是怎么样的？">一个完整的全栈项目应该是怎么样的？</a><time datetime="2025-07-19T15:00:29.000Z" title="发表于 2025-07-19 23:00:29">2025-07-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/19/%E7%90%86%E8%A7%A3ELF%E6%A0%BC%E5%BC%8F/" title="理解ELF格式">理解ELF格式</a><time datetime="2025-07-19T14:59:26.000Z" title="发表于 2025-07-19 22:59:26">2025-07-19</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By xyiling</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.3</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

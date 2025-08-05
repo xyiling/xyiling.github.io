@@ -1,0 +1,230 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>流光不共我的小屋</title><meta name="author" content="xyiling"><meta name="copyright" content="xyiling"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="流光不共我的小屋">
+<meta property="og:url" content="http://xyiling.github.io/page/2/index.html">
+<meta property="og:site_name" content="流光不共我的小屋">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://xyiling.github.io/img/butterfly-icon.png">
+<meta property="article:author" content="xyiling">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://xyiling.github.io/img/butterfly-icon.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://xyiling.github.io/page/2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '流光不共我的小屋',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">流光不共我的小屋</span></a></span><div id="menus"></div></nav><div id="site-info"><h1 id="site-title">流光不共我的小屋</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/01/25/java%E6%80%BB%E7%BB%93/" title="java开发笔记">java开发笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-01-24T16:00:00.000Z" title="发表于 2024-01-25 00:00:00">2024-01-25</time></span></div><div class="content">java开发笔记排序list自带排序： 12345678910List&lt;MyObject&gt; list = ...;list.sort((o1, o2) -&gt; o2.getXXX().compareTo(o1.getXXX()));   // 倒序/** * x.compareTo(y): * 返回值： * 1. &gt; 0, x &gt; y;  * 2. &lt; 0, x &lt; y; * 3. = 0, x = y * / 特点：  自排序，无返回值 如果是对象类型的元素，需要重写Comporator比较器  分割字符串，构造不大于指定大小的字串123456789101112131415161718public static List&lt;String&gt; splitStr(String input, int length) {    List&lt;String&gt; resultStrList = new ArrayList&lt;&gt;();    String[] lines = input.split("\n");    Strin...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/12/28/csapp/" title="csapp阅读笔记">csapp阅读笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-12-27T16:00:00.000Z" title="发表于 2023-12-28 00:00:00">2023-12-28</time></span></div><div class="content">csapp阅读笔记ch1 计算机系统漫游 程序在计算机中以‘比特’的形式存储； c程序到可执行程序：.c(源文件) –&gt; .i(预编译后得到的文件) –&gt; .s(编译后得到的文件) –&gt; .o(汇编后得到的文件) –&gt; .out(可执行文件) 了解编译系统如何工作有什么好处？   优化程序性能：switch和if-else如何取舍？while与for如何选择？指针与索引访问数组，哪一个效率更高？  </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/12/27/intel%20x86%E6%B1%87%E7%BC%96%E8%AF%AD%E6%B3%95/" title="intel x86汇编语法">intel x86汇编语法</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-12-26T16:00:00.000Z" title="发表于 2023-12-27 00:00:00">2023-12-27</time></span></div><div class="content">intel x86基本汇编语法一、基本概念1.1 保护模式和实模式1.2 段1.2.1 段的概念1.2.2 为什么分段1.2.3 使用intel汇编语法访问内存段1.3 偏移1.3.1 偏移的概念1.3.1 段内寻址1.4 中断1.4.1 中断的概念1.4.2 什么时候触发中断1.4.3 中断指令1.5 寄存器寻址1.6 内存寻址1.7 io二、基本语法和代码落地三、对比at&amp;t汇编语法四、参考文献</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/12/22/http%E5%8D%8F%E8%AE%AE/" title="http协议">http协议</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-12-21T16:00:00.000Z" title="发表于 2023-12-22 00:00:00">2023-12-22</time></span></div><div class="content">http协议一、概念特点无状态协议，上一条http请求与下一条http请求没有任何联系，如果上一条是登录请求，下一条如果没有附带上一条的结果（也就是状态），下一条依旧是未登录状态，由此产生cookie技术 二、表现1http://主机地址[:端口][绝对路径] 三、基本结构3.1 请求 123456789+------------------------------------------------------------+|      method       |    uri    |    version    |    CRLF    |+------------------------------------------------------------+|                           header                           |+------------------------------------------------------------+|                                 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/12/22/%E7%BD%91%E7%BB%9C%E5%B1%82ip%E5%8D%8F%E8%AE%AE/" title="网络层ip协议">网络层ip协议</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-12-21T16:00:00.000Z" title="发表于 2023-12-22 00:00:00">2023-12-22</time></span></div><div class="content">网络层IP协议IP协议结构字段详细说明  Version（版本号）：IP 协议版本号。目前只有两个版本：IPv4 和 IPv6 HeaderLength（IP 协议头部长度）：IP 协议头部的长度，单位字节（32bit）需要这个值是因为任选字段的长度是可变的，这个字段占 4bit（最多能表示 15 个 32bit 的的字，即 4*15=60 个字节的首部长度），因此 IP 头部最多有 60 字节长度。正常的长度是 20 字节；如果有额外的 IP 的 options 选项，还得加上 option 的长度。 TypeofService (服务类型)：标示包传输优先级。总共 8 位，是由 3 个优先权位（不再使用），4 个 TOS 位，1 个固定的 0 组成。4 个 TOS 位：最新延迟、最大吞吐量、最高可靠性、最小成本，只能 4 选一。 TotalLength（包长度）：整个 IP 包的长度，16 位，最大可以标示 65536 个字节，TotalLength-HeaderLength = 数据长度。通过 HeaderLength 和 TotalLength 就可以知道数据的起始位置和...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/12/21/%E6%95%B0%E6%8D%AE%E5%8C%85%E5%9C%A8%E4%B8%83%E5%B1%82%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BC%A0%E8%BE%93%E7%BB%86%E8%8A%82/" title="数据包在七层模型的传输细节">数据包在七层模型的传输细节</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-12-20T16:00:00.000Z" title="发表于 2023-12-21 00:00:00">2023-12-21</time></span></div><div class="content">数据包在七层模型的传输细节一、总览数据自应用层产生，在应用层经过 网络分类 按传输范围分：广域网wan、城域网can、局域网lan、个人区域网an 按网络拓补结构分：总线型网络、环状网络、星型网络  二、应用层向app提供网络接口，直接向用户提供服务 2.1 应用层工作内容2.2 应用层协议 远程登录：telnet、ssh 文件传输: ftp、tftp、sftp 电子邮件：smtp、pop3、imap 网页浏览：http、https 网络管理：dns、dhcp  2.3 应用层如何提供功能服务： http/https的概念和作用  三、表示层3.1 表示层的工作内容3.2 表示层如何处理数据包四、会话层4.1 会话层工作内容4.2 会话层如何处理数据包五、传输层5.1 传输层工作内容5.2 传输层协议5.3 传输层如何处理数据包六、网络层6.1 网络层工作内容6.2 网络层协议IP协议ICMP协议IGMP协议ARP协议RARP协议6.3 网络层如何处理数据包七、数据链路层7.1 数据链路层工作内容成帧帧纠错7.2 数据链路层协议7.3 数据链路层如何处理数据包八、物理层8.1 物...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/12/19/linux%E5%86%85%E6%A0%B8%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/" title="linux内核启动流程">linux内核启动流程</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-12-18T16:00:00.000Z" title="发表于 2023-12-19 00:00:00">2023-12-19</time></span></div><div class="content">linux内核启动流程一、硬件自检 电源自检  按下开关键后，电源启动，计算机会进行电源自检POST，主要是检查电源是否连接正常、电源开关是否正常、电源输出是否稳定，防止损坏计算机的硬件设备。CPU状态：实模式，CS=0xFFFF;IP=0x0000，对应实际物理地址0xFFFF0(CS左移4位+IP)，指向装有BIOS的ROM  BIOS自检  电源自检通过，主板通电，读取ROM存放的BIOS程序，进行BIOS自检。BIOS负责管理和控制计算机硬件设备，本质上是一组”程序代码”。 BIOS作为CPU要进行处理的第一个“可执行程序”，也就是第一个“开机启动项”。其程序代码事先被刷入集成在主板的ROM芯片中，主要保存着系统设置程序、基本输入输出程序、开机上电自检程序和系统启动自举程序等  ROM: 只读存储器，不需要供电也可保持数据不丢失。这点特性和内存有着鲜明的对比现在一般用Flash闪存来代替ROM，由于ROM写入后就不能修改，改用Flash闪存后，既方便又能用专用程序即可修改其中代码  BIOS自检内容： 硬件自检-&gt;初始化 自检对象：处理器、内存、硬盘、显卡、声卡、键...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/12/19/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" title="消息队列思想和实现">消息队列思想和实现</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-12-18T16:00:00.000Z" title="发表于 2023-12-19 00:00:00">2023-12-19</time></span></div><div class="content">消息队列一、基本结构 producer：消息生产者，多个，负责将消息发送到消息队列 broker：消息处理中心，包含多个消息队列，负责存储消息、确认、重试等 consumer：消息消费者，从消息队列获取消息  二、消息队列模式 点对点模式  多个producer向同一个broker的同一个queue发送消息，一个具体的消息只能由一个consumer消费  发布/订阅模式  单个消息可以被多个consumer消费 三、RocketMQ简要概述RocketMQ 是阿里开源的消息中间件，纯Java开发，高性能、高可靠、高实时、适合大规模分布式系统应用。 RocketMQ 思路起源于 Kafka，对消息的可靠传输及事务性做了优化 3.1 重要概念 Name 服务器（NameServer）：充当注册中心，类似 Kafka 的 Zookeeper。 Broker: 一个独立的 RocketMQ 服务器就被称为 broker，broker 接收来自生产者的消息，为消息设置偏移量。 主题（Topic）：消息的第一级类型，一条消息必须有一个 Topic。 子主题（Tag）：消息的第二级类型，同一业...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/12/12/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/" title="Linux进程间通信">Linux进程间通信</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-12-11T16:00:00.000Z" title="发表于 2023-12-12 00:00:00">2023-12-12</time></span></div><div class="content">Linux进程通信不同进程的地址空间是隔离的。A 进程的地址 0x4000 和 B 进程的 0x4000 之间没有任何关系。如果要进行进程间通信，最常用的做法是让进程之间通过 127.0.0.1 或者是 Unix Domain Socket 等本机网络手段进行数据的传输。这个方案在传输的数据量较小的时候工作是很不错的。但如果进程间想共享的数据特别大，比如说几个 GB，那如果使用网络 IO 方案的话，就会涉及到大量的内存拷贝的开销，导致比较低的程序性能。这时可以采用进程间**共享内存**的方法来在通信时避免内存拷贝。 一、共享内存的使用方式共享内存发送方进程的开发基本过程是调用 memfd_create 创建一个内存文件。然后通过 mmap 系统调用为这个内存文件申请一块共享内存。然后这个内存文件就可以写入数据了。最后把这个文件的句柄通过 Unix Domain Socket 的方式给接收方进程发送过去。 下面是发送方的核心代码。 12345678910111213141516int main(int argc, char **argv) { // 创建内存文件 fd = memf...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/12/12/python%E5%85%A5%E9%97%A8%E8%AF%AD%E6%B3%95/" title="python入门语法">python入门语法</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-12-11T16:00:00.000Z" title="发表于 2023-12-12 00:00:00">2023-12-12</time></span></div><div class="content">一、类的定义_foo，单下划线开头： protected 类型的变量或方法，只允许其本身与子类进行访问，不能用于 from module import *__foo，双下划线：私有类型(private)的变量或方法, 只允许这个类本身进行访问foo，正常的 public 变量def __foo__(): # 使用__xx__定义的一般是保留的，如__init()__，与c的关键字类似，不建议在日常业务或使用中写这种风格的代码 1234567class TClass:    _foo = 0       # 单下划线开头： protected 类型的变量或方法，只允许其本身与子类进行访问，不能用于 from module import *    __foo = 0      # 双下划线：私有类型(private)的变量或方法, 只允许这个类本身进行访问    foo = 0		   # 正常的 public 变量    def __foo__(): # 使用__xx__定义的一般是保留的，如__init()__，与c的关键字类似，不建议在日常业务或使用中写这种风格的代码     ...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#content-inner">3</a><a class="extend next" rel="next" href="/page/3/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">xyiling</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xyiling"><i class="fab fa-github"></i><span>加个关注吧</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">千里之行始于足下</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/08/03/%E6%A2%A6%E6%83%B3%E5%90%AF%E8%88%AA/" title="梦想启航">梦想启航</a><time datetime="2025-08-03T14:37:00.000Z" title="发表于 2025-08-03 22:37:00">2025-08-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/08/03/linux-0.11%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/" title="无标题">无标题</a><time datetime="2025-08-03T12:32:57.353Z" title="发表于 2025-08-03 20:32:57">2025-08-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/19/%E6%B5%85%E5%85%A5%E6%B5%85%E5%87%BA%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="浅入浅出设计模式">浅入浅出设计模式</a><time datetime="2025-07-19T15:01:02.000Z" title="发表于 2025-07-19 23:01:02">2025-07-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/19/%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84%E5%85%A8%E6%A0%88%E9%A1%B9%E7%9B%AE%E5%BA%94%E8%AF%A5%E6%98%AF%E6%80%8E%E4%B9%88%E6%A0%B7%E7%9A%84%EF%BC%9F/" title="一个完整的全栈项目应该是怎么样的？">一个完整的全栈项目应该是怎么样的？</a><time datetime="2025-07-19T15:00:29.000Z" title="发表于 2025-07-19 23:00:29">2025-07-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/19/%E7%90%86%E8%A7%A3ELF%E6%A0%BC%E5%BC%8F/" title="理解ELF格式">理解ELF格式</a><time datetime="2025-07-19T14:59:26.000Z" title="发表于 2025-07-19 22:59:26">2025-07-19</time></div></div></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      <a class="card-more-btn" href="/archives/"
+            title="查看更多">
+            <i class="fas fa-angle-right"></i>
+          </a>
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/08/">
+            <span class="card-archive-list-date">
+              八月 2025
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/07/">
+            <span class="card-archive-list-date">
+              七月 2025
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/04/">
+            <span class="card-archive-list-date">
+              四月 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/04/">
+            <span class="card-archive-list-date">
+              四月 2024
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/03/">
+            <span class="card-archive-list-date">
+              三月 2024
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/01/">
+            <span class="card-archive-list-date">
+              一月 2024
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2023/12/">
+            <span class="card-archive-list-date">
+              十二月 2023
+            </span>
+            <span class="card-archive-list-count">9</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2023/07/">
+            <span class="card-archive-list-date">
+              七月 2023
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">24</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-08-05T00:25:58.472Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By xyiling</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.3</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
