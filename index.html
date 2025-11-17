@@ -411,7 +411,7 @@
         <div class="label text-third-text-color text-sm">Categories</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">2</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">5</div>
         <div class="label text-third-text-color text-sm">Posts</div>
     </a>
 </div>
@@ -451,7 +451,7 @@
         <div class="label text-third-text-color text-sm">Categories</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">2</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">5</div>
         <div class="label text-third-text-color text-sm">Posts</div>
     </a>
 </div>
@@ -476,8 +476,8 @@
                 
                 <div class="flex flex-col gap-5 px-7 pb-7 pt-7">
                     <h3 class="home-article-title">
-                        <a href="/2025/11/16/test-my-site/">
-                            test_my_site
+                        <a href="/2025/11/17/gdb%E8%B0%83%E8%AF%95/">
+                            gdb调试
                         </a>
                     </h3>
 
@@ -485,15 +485,31 @@
                         
                             
                             
+
+
+通用前缀
+功能
+输出格式
+内存地址
+
+
+
+-exec
+&#x2F;x
+&#x2F;200xb
+0x8000
+
+
+
                         
                     </div>
 
                     <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
         <span><i class="fa-solid fa-calendars"></i>&nbsp;
-            <span class="home-article-date" data-date="Sun Nov 16 2025 23:53:01 GMT+0800">
+            <span class="home-article-date" data-date="Mon Nov 17 2025 08:50:03 GMT+0800">
                 
-                    2025-11-16
+                    2025-11-17
                 
             </span>
         </span>
@@ -501,7 +517,7 @@
         
     </div>
 
-    <a href="/2025/11/16/test-my-site/">Read more<span class="seo-reader-text">test_my_site</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+    <a href="/2025/11/17/gdb%E8%B0%83%E8%AF%95/">Read more<span class="seo-reader-text">gdb调试</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
 </div>
 
                 </div>
@@ -516,25 +532,28 @@
                 
                 <div class="flex flex-col gap-5 px-7 pb-7 pt-7">
                     <h3 class="home-article-title">
-                        <a href="/2025/11/16/hello-world/">
-                            Hello World
+                        <a href="/2025/11/17/%E7%89%A9%E7%90%86%E5%86%85%E5%AD%98%E4%B8%8E%E6%80%BB%E7%BA%BF%E5%AE%BD%E5%BA%A6/">
+                            物理内存与总线宽度
                         </a>
                     </h3>
 
                     <div class="home-article-content markdown-body">
                         
                             
-                            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Qu...
+                            
+实际的内存由多部分组成，比如bios的rom区，内存的ram区域等，所以会需要分出部分内存地址用于与设备通信，其余的内存地址才与内存通信。
+物理内存的大小与可用内存的大小有区别，后者受到总线宽度的限制，如果数据总线宽度只有20（20跟地址线），这物理内存最大为1MB,如果地址线有32根，将得到4GB的可用内存。
+
+
                         
                     </div>
 
                     <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
         <span><i class="fa-solid fa-calendars"></i>&nbsp;
-            <span class="home-article-date" data-date="Sun Nov 16 2025 23:50:27 GMT+0800">
+            <span class="home-article-date" data-date="Mon Nov 17 2025 08:50:03 GMT+0800">
                 
-                    2025-11-16
+                    2025-11-17
                 
             </span>
         </span>
@@ -542,7 +561,158 @@ Qu...
         
     </div>
 
-    <a href="/2025/11/16/hello-world/">Read more<span class="seo-reader-text">Hello World</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+    <a href="/2025/11/17/%E7%89%A9%E7%90%86%E5%86%85%E5%AD%98%E4%B8%8E%E6%80%BB%E7%BA%BF%E5%AE%BD%E5%BA%A6/">Read more<span class="seo-reader-text">物理内存与总线宽度</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                
+
+                
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-7">
+                    <h3 class="home-article-title">
+                        <a href="/2025/11/17/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/">
+                            启动流程
+                        </a>
+                    </h3>
+
+                    <div class="home-article-content markdown-body">
+                        
+                            
+                            开机时，CPU的cs：ip寄存器被强制初始化为0xF000：0xFFF0。这时候cpu处于实模式，段基址要乘以16，也就是左移4位，于是0xF000：0xFFF0的等效地址将是0xFFFF0。此地址是BIOS的入口地址。
+随后，该地址的内容是一条远跳转指令，将ip寄存器指向0xf000：e05b，顺便刷新cs寄存器。
+执行完后，ip寄存器指向0x7c00，从硬盘的0磁盘0道1扇区读取mbr并...
+                        
+                    </div>
+
+                    <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Mon Nov 17 2025 08:50:03 GMT+0800">
+                
+                    2025-11-17
+                
+            </span>
+        </span>
+        
+        
+    </div>
+
+    <a href="/2025/11/17/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/">Read more<span class="seo-reader-text">启动流程</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                
+
+                
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-7">
+                    <h3 class="home-article-title">
+                        <a href="/2025/11/17/%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/">
+                            内存布局
+                        </a>
+                    </h3>
+
+                    <div class="home-article-content markdown-body">
+                        
+                            
+                            
+
+
+内存区间
+大小
+主要功能
+
+
+
+0xffff0~0xfffff
+16B
+固定了一条远跳转指令:0xffff0，用于跳转到0xf000:e05b处执行第一条指令
+
+
+0xf0000~0xfffef
+64KB-16B
+这个是系统的bios内存地址范围，其实上面的远跳转指令也是这个范围，但是要单独拿出来
+
+
+0xc8000~0xeffff
+160KB
+映射硬件适配器的ROM或内存映射式I&#...
+                        
+                    </div>
+
+                    <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Mon Nov 17 2025 08:50:03 GMT+0800">
+                
+                    2025-11-17
+                
+            </span>
+        </span>
+        
+        
+    </div>
+
+    <a href="/2025/11/17/%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/">Read more<span class="seo-reader-text">内存布局</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                
+
+                
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-7">
+                    <h3 class="home-article-title">
+                        <a href="/2025/11/17/%E4%BB%A3%E7%A0%81%E6%AE%B5%E5%8A%9F%E8%83%BD%E5%B0%8F%E7%BB%93/">
+                            代码段功能小结
+                        </a>
+                    </h3>
+
+                    <div class="home-article-content markdown-body">
+                        
+                            
+                            
+.text: 存储指令和代码
+.rodata: 存放常量和字符串本身
+.data: 存放已初始化的数据，包括全局和静态的
+.bss: 存放未初始化的数据（即使初始化为0）。包括全局的和静态的
+stack: 存储局部变量
+相同的段会自动合并
+
+
+                        
+                    </div>
+
+                    <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Mon Nov 17 2025 08:50:03 GMT+0800">
+                
+                    2025-11-17
+                
+            </span>
+        </span>
+        
+        
+    </div>
+
+    <a href="/2025/11/17/%E4%BB%A3%E7%A0%81%E6%AE%B5%E5%8A%9F%E8%83%BD%E5%B0%8F%E7%BB%93/">Read more<span class="seo-reader-text">代码段功能小结</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
 </div>
 
                 </div>
@@ -578,7 +748,7 @@ Qu...
                 
                 <p class="post-count space-x-0.5">
                     <span>
-                        2 posts in total
+                        5 posts in total
                     </span>
                     
                 </p>
