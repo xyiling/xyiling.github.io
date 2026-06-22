@@ -11,6 +11,15 @@ importers:
       hexo:
         specifier: ^8.0.0
         version: 8.1.2(chokidar@3.6.0)
+      hexo-abbrlink:
+        specifier: ^2.2.1
+        version: 2.2.1
+      hexo-addlink:
+        specifier: ^1.0.4
+        version: 1.0.4
+      hexo-admonition:
+        specifier: ^1.1.2
+        version: 1.1.2
       hexo-asset-image:
         specifier: ^1.0.0
         version: 1.0.0
@@ -111,6 +120,9 @@ packages:
 
   anynum@1.0.1:
     resolution: {integrity: sha512-N6//FLET/tXYNM/F6ABca1oH6fWB+KlTt909Le28WMDBk8oaT4vY17DCrwg2MvmuqUKt3Ni4N5dGJ/EoBgcO6A==}
+
+  argparse@1.0.10:
+    resolution: {integrity: sha512-o5Roy6tNG4SL/FOkCAN6RzjiakZS25RLYFrcMttJqbdd8BWrnA+fGz57iN5Pb06pvBGvl5gQ0B48dJlslXvoTg==}
 
   argparse@2.0.1:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
@@ -397,6 +409,15 @@ packages:
     resolution: {integrity: sha512-T2UbfbBEF32wiepXIsMlTW9+dDYC6wMh/t/vYA4tuOMKqWz/n3vr1NFSxQiyP+zk2mXsoMA/i/7qV6LKut1t1A==}
     engines: {node: '>= 0.4'}
 
+  hexo-abbrlink@2.2.1:
+    resolution: {integrity: sha512-yvazN7bbrIb7p8QU3nJ/8fbDmir1mFroYvUYcJz5xpc6DtszKggschmqZg6WNUdjhDBFyDwksrIUfwQnw0OOuA==}
+
+  hexo-addlink@1.0.4:
+    resolution: {integrity: sha512-7hd4En//MzWTgkTr4iWlaP0SJMkkv7fgClfg2p/QTveg0DNjuZtKm9116gGZ67tIGpzFqhAd8gP1sBmqDd53Uw==}
+
+  hexo-admonition@1.1.2:
+    resolution: {integrity: sha512-0TtXPe9aZBqqHPXJ77xyUck4qr3RsYkiq5tVrdgJyEYxREFfx2XcRgQh0fro5Vl1F8nmG2FraxeW2QLNUO8eaA==}
+
   hexo-asset-image@1.0.0:
     resolution: {integrity: sha512-jkuUJNPRMH6v7HqzP2BAwEZavMzVxNWhl8jZl9BmFYB22/aq2+zixGIhV4vedI9cLPydjn9DfII41/MMXtzJTA==}
 
@@ -416,9 +437,17 @@ packages:
     resolution: {integrity: sha512-roIkEIkGOR22EPMoy8iKrufDoAH25LOT5ZeVXVLavEpM757Y96kfUhyathryMLXr326EURffgkZAKsVf3EDl0A==}
     engines: {node: '>= 8.6.0'}
 
+  hexo-front-matter@1.0.0:
+    resolution: {integrity: sha512-Hn8IIzgWWnxYTekrjnA0rxwWMoQHifyrxKMqVibmFaRKf4AQ2V6Xo13Jiso6CDwYfS+OdA41QS5DG1Y+QXA5gw==}
+    engines: {node: '>=8.6.0'}
+
   hexo-front-matter@4.2.1:
     resolution: {integrity: sha512-sJJI0GNmejYiwBvgnGRKn5V3sbODB4dNPr8jyw2Qp0PRHr4Uuyv8iyxw6WfK3+T7yvzYvJOh+tZ7jnwr2BYARA==}
     engines: {node: '>=14'}
+
+  hexo-fs@3.1.0:
+    resolution: {integrity: sha512-SfoDH7zlU9Iop+bAfEONXezbNIkpVX1QqjNCBYpapilZR+xVOCfTEdlNixanrKBbLGPb2fXqrdDBFgrKuiVGQQ==}
+    engines: {node: '>=10.13.0'}
 
   hexo-fs@4.1.3:
     resolution: {integrity: sha512-Q92zQ5PlVDouvSWFLXQoFSTLIUIODikUJs2BfAXQglyOEjN1dOQn1Z5Nimk/7GHof17R5h/uObCQLnZAjzI2tg==}
@@ -591,6 +620,10 @@ packages:
     peerDependencies:
       js-yaml: 4.x
 
+  js-yaml@3.14.2:
+    resolution: {integrity: sha512-PMSmkqxr106Xa156c2M265Z+FTrPl+oxd/rgOQy2tijQeK5TxQ43psO1ZCwhVOSdnn+RzkzlRz/eY4BgJBYVpg==}
+    hasBin: true
+
   js-yaml@4.2.0:
     resolution: {integrity: sha512-ePWsvanv0DWuDRsW8dnt+R4jQ31SCRCQ7hhNcPXZPsoBZiemuZNYGf7adZdqX2D86j6rvKp3RpCxVTSb8WQlOw==}
     hasBin: true
@@ -598,6 +631,9 @@ packages:
   jsonparse@1.3.1:
     resolution: {integrity: sha512-POQXvpdL69+CluYsillJ7SUhKvytYjW9vG/GKpnf+xP8UWgYEM/RaMzHHofbALDiKbbP1W8UEYmgGl39WkPZsg==}
     engines: {'0': node >= 0.2.0}
+
+  linkify-it@2.2.0:
+    resolution: {integrity: sha512-GnAl/knGn+i1U/wjBz3akz2stz+HrHLsxMwHQGofCDfPvlf+gDKN58UtfmUquTY4/MXeE2x7k19KQmeoZi94Iw==}
 
   linkify-it@4.0.1:
     resolution: {integrity: sha512-C7bfi1UZmoj8+PQx22XyeXCuBlokoyWQL5pWSP+EI6nzRylyThouddufc2c1NDIcP9k5agmN9fLpA7VNJfIiqw==}
@@ -662,6 +698,10 @@ packages:
 
   markdown-it@13.0.2:
     resolution: {integrity: sha512-FtwnEuuK+2yVU7goGn/MJ0WBZMM9ZPgU9spqlFs7/A/pDIUNSOQZhUgOqYCficIuR2QaFnrt8LHqBWsbTAoI5w==}
+    hasBin: true
+
+  markdown-it@9.1.0:
+    resolution: {integrity: sha512-xHKG4C8iPriyfu/jc2hsCC045fKrMQ0VexX2F1FGYiRxDxqMB2aAhF8WauJ3fltn2kb90moGBkiiEdooGIg55w==}
     hasBin: true
 
   mathjax-full@3.2.2:
@@ -885,6 +925,9 @@ packages:
     resolution: {integrity: sha512-i/VCLG1fvRc95pMHRqG4aQNscv+9aIsqA2oI7ZQS51sTdUcDHYX6cpT8/tqZ+enjs1tKVwbRBWgxut9SWn+f9g==}
     hasBin: true
 
+  sprintf-js@1.0.3:
+    resolution: {integrity: sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==}
+
   sprintf-js@1.1.3:
     resolution: {integrity: sha512-Oo+0REFV59/rz3gfJNKQiBlwfHaSESl1pcGyABQsnnIfWOFt6JNj5gCog2U6MLZ//IGYD+nA8nI+mTShREReaA==}
 
@@ -1010,6 +1053,10 @@ snapshots:
       picomatch: 2.3.2
 
   anynum@1.0.1: {}
+
+  argparse@1.0.10:
+    dependencies:
+      sprintf-js: 1.0.3
 
   argparse@2.0.1: {}
 
@@ -1300,6 +1347,17 @@ snapshots:
     dependencies:
       function-bind: 1.1.2
 
+  hexo-abbrlink@2.2.1:
+    dependencies:
+      hexo-front-matter: 1.0.0
+      hexo-fs: 3.1.0
+
+  hexo-addlink@1.0.4: {}
+
+  hexo-admonition@1.1.2:
+    dependencies:
+      markdown-it: 9.1.0
+
   hexo-asset-image@1.0.0:
     dependencies:
       cheerio: 0.19.0
@@ -1335,9 +1393,20 @@ snapshots:
 
   hexo-filter-nofollow@2.0.2: {}
 
+  hexo-front-matter@1.0.0:
+    dependencies:
+      js-yaml: 3.14.2
+
   hexo-front-matter@4.2.1:
     dependencies:
       js-yaml: 4.2.0
+
+  hexo-fs@3.1.0:
+    dependencies:
+      bluebird: 3.7.2
+      chokidar: 3.6.0
+      graceful-fs: 4.2.11
+      hexo-util: 2.7.0
 
   hexo-fs@4.1.3:
     dependencies:
@@ -1598,11 +1667,20 @@ snapshots:
       esprima: 4.0.1
       js-yaml: 4.2.0
 
+  js-yaml@3.14.2:
+    dependencies:
+      argparse: 1.0.10
+      esprima: 4.0.1
+
   js-yaml@4.2.0:
     dependencies:
       argparse: 2.0.1
 
   jsonparse@1.3.1: {}
+
+  linkify-it@2.2.0:
+    dependencies:
+      uc.micro: 1.0.6
 
   linkify-it@4.0.1:
     dependencies:
@@ -1655,6 +1733,14 @@ snapshots:
       argparse: 2.0.1
       entities: 3.0.1
       linkify-it: 4.0.1
+      mdurl: 1.0.1
+      uc.micro: 1.0.6
+
+  markdown-it@9.1.0:
+    dependencies:
+      argparse: 1.0.10
+      entities: 1.1.2
+      linkify-it: 2.2.0
       mdurl: 1.0.1
       uc.micro: 1.0.6
 
@@ -1869,6 +1955,8 @@ snapshots:
       '@xmldom/xmldom': 0.9.10
       commander: 13.1.0
       wicked-good-xpath: 1.3.0
+
+  sprintf-js@1.0.3: {}
 
   sprintf-js@1.1.3: {}
 
