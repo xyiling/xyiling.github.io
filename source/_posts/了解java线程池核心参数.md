@@ -1,5 +1,6 @@
 ---
 title: 了解java线程池核心参数
+abbrlink: c8690aa5
 date: 2026-06-22 17:45:16
 tags:
 ---

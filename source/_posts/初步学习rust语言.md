@@ -1,5 +1,6 @@
 ---
 title: 初步学习rust语言
+abbrlink: c41d46de
 date: 2026-06-22 18:17:09
 tags:
 ---

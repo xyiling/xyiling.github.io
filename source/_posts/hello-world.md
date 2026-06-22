@@ -1,5 +1,6 @@
 ---
 title: Hello World
+abbrlink: 4a17b156
 ---
 
 {% chart 300 200 %}                                                       
