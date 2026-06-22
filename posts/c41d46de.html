@@ -1,245 +1,104 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
-    <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  
-    <link rel="icon" href="/xyiling/xyiling.github.io/img/favicon.png">
-  
-  
-      <meta name="author" content="xyiling">
-  
-  
-      <meta name="subtitle" content="keep learning">
-  
-  
-  
-  
-    <link rel="alternate" href="/xyiling/xyiling.github.io/atom.xml " title="xyiling&#39;s blogs" type="application/atom+xml">
-  
+    <head>
+        <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  
+<!-- Title -->
+<title>初步学习rust语言 - xyiling&#39;s blogs</title>
 
-  <title>初步学习rust语言 | xyiling&#39;s blogs</title>
+<!-- Icon -->
+<link rel="icon" href="https://d33wubrfki0l68.cloudfront.net/6657ba50e702d84afb32fe846bed54fba1a77add/827ae/logo.svg">
 
-  
+<!-- Fonts -->
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital@0;1&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" as="style" onload="this.onload=null, this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital@0;1&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"></noscript>
 
-  
 
-  
 
-  <link rel="stylesheet" href="/xyiling/xyiling.github.io/css/style.css" >
-  <link rel="stylesheet" href="/xyiling/xyiling.github.io/css/partial/dark.css" >
+<!-- Style -->
 
-  
-  
-  
+<link rel="stylesheet" href="/xyiling/xyiling.github.io/styles/main.css">
 
-  
-    
-      <link rel="stylesheet" href="/xyiling/xyiling.github.io/css/partial/highlight/atom-one-light.css">
-    
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
-    
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css">
-    
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/a2396837/CDN@latest/css/iconfont.css">
-    
-  
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-theme-pure@1.0.1/dist/main.css"> -->
 
-  
-<meta name="generator" content="Hexo 8.1.2"></head>
-</html>
-    
-<div class="nav index" style="height: 60px;">
-    <div class="title animated fadeInDown">
-        <div class="layui-container">
-                <div class="nav-title"><a href="/xyiling/xyiling.github.io/" title="xyiling&#39;s blogs">xyiling&#39;s blogs</a></div>
-            <div class="nav-list">
-                <button> <span class=""></span><span style="display: block;"></span><span class=""></span> </button>
-                <ul class="layui-nav" lay-filter="">
-                    
-                        
-                        
-                        
-                        
-                    <li class="layui-nav-item">
-                        <a href="/search/ ">
-                            <i class=" fas fa-search-plus " style="color: rgb(3 169 244);"></i>
-                            <span class="layui-nav-item-name">搜索</span>
-                        </a>
-                    </li>
-                    
-                        
-                        
-                        
-                        
-                    <li class="layui-nav-item">
-                        <a href="/ ">
-                            <i class=" fab fa-fort-awesome " style="color: rgb(255 107 107);"></i>
-                            <span class="layui-nav-item-name">首页</span>
-                        </a>
-                    </li>
-                    
-                        
-                        
-                        
-                        
-                    <li class="layui-nav-item">
-                        <a href="/archives/ ">
-                            <i class=" fas fa-archive " style="color: rgb(10 189 227);"></i>
-                            <span class="layui-nav-item-name">归档</span>
-                        </a>
-                    </li>
-                    
-                        
-                        
-                        
-                        
-                    <li class="layui-nav-item">
-                        <a href="/tags/ ">
-                            <i class=" fas fa-hashtag " style="color: rgb(254 202 87);"></i>
-                            <span class="layui-nav-item-name">标签</span>
-                        </a>
-                    </li>
-                    
-                        
-                        
-                        
-                        
-                    <li class="layui-nav-item">
-                        <a href="/categories ">
-                            <i class=" far fa-folder-open " style="color: rgb(29 209 161);"></i>
-                            <span class="layui-nav-item-name">分类</span>
-                        </a>
-                    </li>
-                    
-                        
-                        
-                        
-                        
-                    <li class="layui-nav-item">
-                        <a href="/about/ ">
-                            <i class=" fab fa-grav " style="color: rgb(154 106 247);"></i>
-                            <span class="layui-nav-item-name">关于</span>
-                        </a>
-                    </li>
-                    
-                        
-                        
-                        
-                        
-                    <li class="layui-nav-item">
-                        <a href="/guestbook/ ">
-                            <i class=" fab fa-telegram " style="color: hsl(205deg 100% 50%);"></i>
-                            <span class="layui-nav-item-name">留言</span>
-                        </a>
-                    </li>
-                    
-                        
-                        
-                        
-                        
-                    <li class="layui-nav-item">
-                        <a href="/link/ ">
-                            <i class=" fab fa-weixin " style="color: hsl(152deg 73% 45%);"></i>
-                            <span class="layui-nav-item-name">友链</span>
-                        </a>
-                    </li>
-                    
-                        
-                        
-                        
-                        
-                    <li class="layui-nav-item">
-                        <a href="/shuoshuo/ ">
-                            <i class=" fas fa-coffee " style="color:#31c7c1;"></i>
-                            <span class="layui-nav-item-name">说说</span>
-                        </a>
-                    </li>
-                    
-                    
-                    <span class="layui-nav-bar" style="left: 342px; top: 78px; width: 0px; opacity: 0;"></span>
-                </ul>
-            </div>
+
+
+
+
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+
+    <meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/xyiling/xyiling.github.io/atom.xml" title="xyiling's blogs" type="application/atom+xml">
+</head>
+    <body>
+        <div class="main gt-bg-theme-color-first">
+            <div class="main-content">
+                <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/xyiling/xyiling.github.io/">
+        <img class="user-avatar" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0Ij48Y2lyY2xlIGN4PSI0IiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgaWQ9InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAiIGF0dHJpYnV0ZU5hbWU9InIiIGJlZ2luPSIwO3N2Z1NwaW5uZXJzM0RvdHNTY2FsZTEuZW5kLTAuMjVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNnMiIGR1cj0iMC43NXMiIHZhbHVlcz0iMzsuMjszIi8+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMjAiIGN5PSIxMiIgcj0iMyIgZmlsbD0iY3VycmVudENvbG9yIj48YW5pbWF0ZSBpZD0ic3ZnU3Bpbm5lcnMzRG90c1NjYWxlMSIgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNDVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjwvc3ZnPg==" data-original="https://d33wubrfki0l68.cloudfront.net/6657ba50e702d84afb32fe846bed54fba1a77add/827ae/logo.svg" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            xyiling&#39;s blogs
+        </div>
+    </a>
+    <button aria-label="Navbar Toggler" class="navbar-toggler" type="button" id="changeNavbar">
+        <i class="gt-c-content-color-first" style="font-size: 18px;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" height="18px" fill="currentColor">
+                <path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z" />
+            </svg>
+        </i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center; ">
+            
+                <div class="nav-item">
+                    <a href="/xyiling/xyiling.github.io/" class="menu gt-a-link" target="_self">首页</a>
+                </div>
+            
+                <div class="nav-item">
+                    <a href="/xyiling/xyiling.github.io/archives/" class="menu gt-a-link" target="_self">归档</a>
+                </div>
+            
+                <div class="nav-item">
+                    <a href="/xyiling/xyiling.github.io/tags/" class="menu gt-a-link" target="_self">标签</a>
+                </div>
+            
+                <div class="nav-item">
+                    <a href="/xyiling/xyiling.github.io/friends/" class="menu gt-a-link" target="_self">友链</a>
+                </div>
+            
         </div>
     </div>
-</div>
-    
-<header class="header">
-        
-            <div class="logo">
-                    <a href="/xyiling/xyiling.github.io/"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0Ij48Y2lyY2xlIGN4PSI0IiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgaWQ9InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAiIGF0dHJpYnV0ZU5hbWU9InIiIGJlZ2luPSIwO3N2Z1NwaW5uZXJzM0RvdHNTY2FsZTEuZW5kLTAuMjVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNnMiIGR1cj0iMC43NXMiIHZhbHVlcz0iMzsuMjszIi8+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMjAiIGN5PSIxMiIgcj0iMyIgZmlsbD0iY3VycmVudENvbG9yIj48YW5pbWF0ZSBpZD0ic3ZnU3Bpbm5lcnMzRG90c1NjYWxlMSIgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNDVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjwvc3ZnPg==" data-original="https://cdn.jsdelivr.net/gh/a2396837/CDN@latest/images/2020/07/27/baokemeng.webp" onerror=this.onerror=null,this.src="/xyiling/xyiling.github.io/img/loading.gif"></a>
-            </div>
-         
-    </div>
-     
-    
-            <div class="social">
+</nav>
+
+<script>
+    /* 移动端导航栏展开/收起切换 */
+    document.getElementById('changeNavbar').onclick = function() {
+        let element = document.getElementById('navbarSupportedContent');
+        if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = 'block';
+        } else { 
+            element.style.display = 'none';
+        }
+    }
+</script>
+
+                <div class="post-container">
+    <div class="post-detail gt-bg-theme-color-second gt-c-content-color-first">
+        <article class="gt-post-content">
+            <h1 class="post-title">初步学习rust语言</h1>
+            <div class="post-info">
+                <time class="post-time gt-c-content-color-first">
+                    · 2026-06-22 ·</time>
+                <span class="post-wordcount gt-c-content-color-second">
+                    202 字 ·</span>
                 
-                        <a class="social-icon" href="https://github.com/xyiling" target="_blank" title="Github">
-                            <i class="iconfont icon-GitHub" aria-hidden="true"></i>
-                          </a>
-                 
-                        <a class="social-icon" href="mailto:1745947934@qq.com" rel="external nofollow noreferrer" target="_blank" title="Email">
-                            <i class="iconfont icon-email" aria-hidden="true"></i>
-                          </a>
-                 
-                        <a class="social-icon" href="https://steamcommunity.com/id/a2396837" rel="external nofollow noreferrer" target="_blank" title="Steam">
-                            <i class="iconfont icon-steam" aria-hidden="true"></i>
-                          </a>
-                 
-                        <a class="social-icon" href="https://space.bilibili.com/372830512" rel="external nofollow noreferrer" target="_blank" title="Bilibili">
-                            <i class="iconfont icon-bilibili" aria-hidden="true"></i>
-                          </a>
-                 
-                        <a class="social-icon" href="https://music.163.com/#/user/home?id=262078590" rel="external nofollow noreferrer" target="_blank" title="Netmusic">
-                            <i class="iconfont icon-wangyiyunyinle1" aria-hidden="true"></i>
-                          </a>
-                 
-                        <a class="social-icon" href="/atom.xml" target="_blank" title="rss">
-                            <i class="iconfont icon-rss" aria-hidden="true"></i>
-                          </a>
-                 
+                    
+                
             </div>
-     
-</header>
-
-    
-<article id="post">
-  <div class="post-title">初步学习rust语言</div>
-  
-<div class="post-meta">
-    
-    
-      <div class="post-meta-item date">
-        <span title="发表于 2026.06.22"><i class="far fa-calendar-alt"></i> 2026.06.22</span>
-      </div>
-      <div class="post-meta-item updated">
-        <span title="更新于 2026.06.22"><i class="far fa-calendar-check"></i> 2026.06.22</span>
-      </div>
-     
-     
-    
-     <div class="post-meta-item wordcount">
-        
-          <i class="fas fa-pencil-alt"></i> <span class="post-count">130 字</span>
-           
-        
-          <i class="far fa-clock"></i> <span class="post-count">1 分钟</span>
-                               
-      </div>
-     
-</div>
-
-
-  
-  <div class="content">
-        <div><p>数据竞争：</p>
+            <hr>
+            <div class="post-content gt-c-content-color-first">
+                <p>数据竞争：</p>
 <ol>
 <li>多个进程操作同一个文件/多个线程操作同一个文件或变量</li>
 <li>至少1个写进程</li>
@@ -247,264 +106,138 @@
 </ol>
 <p>rust支持对一个mut变量创建引用，但是不支持既创建可变引用，又创建不可变引用<br>
 但是可以在不可变引用结束所有访问之后，再创建可变引用，因为后续的改变不会影响前面的读数</p>
-<p>hello <a href="https://github.com/xyiling/xyiling.github.io/posts/undefined.html">https://github.com/xyiling/xyiling.github.io/posts/undefined.html</a> bye</p>
+<p>hello <a href="https://github.com/xyiling/xyiling.github.io/posts/c41d46de.html">https://github.com/xyiling/xyiling.github.io/posts/c41d46de.html</a> bye</p>
+
+            </div>
+        </article>
+    </div>
+    <br>
+    
+        <div class="next-prev-post">
+            
+                <div class="prev-post">
+                    <div class="prev gt-c-content-color-first">
+                        上一篇：<a href="/xyiling/xyiling.github.io/posts/eaac5978.html" 
+                            class="post-title gt-a-link">pandas学习笔记</a>
+                    </div>
+                </div>
+            
+            
+                <div class="next-post">
+                    <div class="next gt-c-content-color-first">
+                        下一篇：<a href="/xyiling/xyiling.github.io/posts/c8690aa5.html" 
+                            class="post-title gt-a-link">了解java线程池核心参数</a>
+                    </div>
+                </div>
+            
+        </div>
+    
+    
+
+    
+
+    
 </div>
-        
-          <div class="post-copyright">
-                  <div class="copyright-item">
-                      <span> 作者: xyiling</span>
-                  </div>
-                  <div class="copyright-item">
-                      <span> 链接: <a href="https://github.com/xyiling/xyiling.github.io/posts/c41d46de.html">https://github.com/xyiling/xyiling.github.io/posts/c41d46de.html</a></span>
-                  </div>
-                  <div class="copyright-item">
-                      <span> 声明: 本博客所有文章除特别声明外，均采用许可协议 <a target="_blank" rel="noopener external nofollow noreferrer" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> 转载请注明出处！</span>
-                  </div>
-          </div>
-        
-  </div>
 
-  <div class="share-reward">
-    <div class="share">
-        
-<div class="social-share" data-sites="facebook,twitter,wechat,weibo,qq"></div>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css">
-<script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script>
-
-
-      </div>
-        <div class="reward">
-          
-  <div style="padding: 10px 0; margin-left: 20px; width: 90%; text-align: center;">
-    <div class="reward-content">
-        <ul id="donateBox" class="list pos-a">
-          
-           <li id="PayPal"><a href="https://paypal.me" rel="external nofollow noreferrer" target="_blank" title="贝宝">贝宝</a></li>
-            
-          
-            <li id="AliPay" title="支付宝"><img data-img="/img/alipay.jpg" onerror=this.onerror=null,this.src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0Ij48Y2lyY2xlIGN4PSI0IiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgaWQ9InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAiIGF0dHJpYnV0ZU5hbWU9InIiIGJlZ2luPSIwO3N2Z1NwaW5uZXJzM0RvdHNTY2FsZTEuZW5kLTAuMjVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNnMiIGR1cj0iMC43NXMiIHZhbHVlcz0iMzsuMjszIi8+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMjAiIGN5PSIxMiIgcj0iMyIgZmlsbD0iY3VycmVudENvbG9yIj48YW5pbWF0ZSBpZD0ic3ZnU3Bpbm5lcnMzRG90c1NjYWxlMSIgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNDVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjwvc3ZnPg==" data-original="/xyiling/xyiling.github.io/img/loading.gif"></img></li>
-               
-                 
-            <li id="WeChat" title="微信"><img date-img="/img/wechat.jpg" onerror=this.onerror=null,this.src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0Ij48Y2lyY2xlIGN4PSI0IiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgaWQ9InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAiIGF0dHJpYnV0ZU5hbWU9InIiIGJlZ2luPSIwO3N2Z1NwaW5uZXJzM0RvdHNTY2FsZTEuZW5kLTAuMjVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNnMiIGR1cj0iMC43NXMiIHZhbHVlcz0iMzsuMjszIi8+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMjAiIGN5PSIxMiIgcj0iMyIgZmlsbD0iY3VycmVudENvbG9yIj48YW5pbWF0ZSBpZD0ic3ZnU3Bpbm5lcnMzRG90c1NjYWxlMSIgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNDVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjwvc3ZnPg==" data-original="/xyiling/xyiling.github.io/img/loading.gif"></img></li>
-                      
-          </ul>
-        <div id="QRBox" class="pos-f left-100">
-          <div id="MainBox"></div>
-        </div>
+<div class="post-toc" id="post-toc">
+    <div class="toc-label">
+        <div>文章目录</div>
+        <a href="javascript:;" rel="external nofollow noreferrer" id="post-toc-close">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" height="16" width="16">
+                <path d="M193.94 256L296.5 153.44l21.15-21.15c3.12-3.12 3.12-8.19 0-11.31l-22.63-22.63c-3.12-3.12-8.19-3.12-11.31 0L160 222.06 36.29 98.34c-3.12-3.12-8.19-3.12-11.31 0L2.34 120.97c-3.12 3.12-3.12 8.19 0 11.31L126.06 256 2.34 379.71c-3.12 3.12-3.12 8.19 0 11.31l22.63 22.63c3.12 3.12 8.19 3.12 11.31 0L160 289.94 262.56 392.5l21.15 21.15c3.12 3.12 8.19 3.12 11.31 0l22.63-22.63c3.12-3.12 3.12-8.19 0-11.31L193.94 256z" fill="currentColor" />
+            </svg>
+        </a>
     </div>
-  </div>
-  
-        </div>
-    </div>
-    
-    <div class="post_tags">
-      
-    </div>
-    <div class="post-nav">
-      
-        <div class="post-nav-prev post-nav-item">
-            <a href="/xyiling/xyiling.github.io/posts/eaac5978.html" >pandas学习笔记<i class="fa fa-chevron-left"></i></a>
-        </div>
-      
-      
-        <div class="post-nav-next post-nav-item">
-            <a href="/xyiling/xyiling.github.io/posts/c8690aa5.html" >了解java线程池核心参数<i class="fa fa-chevron-right"></i></a>
-        </div>
-      
-    </div>
-      
+    （无目录）
+</div>
 
-
-
-  <div id="valine"></div>
-  <script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
-  <script>
-        new Valine({
-          el: '#valine',
-          appId: "",
-          appKey: "",
-          avatar: "mm",
-          lang: "",
-          meta: 'nick,mail,link'.split(','),
-          requiredFields: 'nick,mail'.split(','),
-          placeholder: "评论记得带上邮箱,你的留言我会马上收到邮箱提醒哒",
-          pageSize:'10',
-          recordIP: 'false',
-          serverURLs: "",
-          emojiCDN: "",
-          enableQQ: "true",
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var tocBtn = document.getElementById('toc-btn');
+    var postToc = document.getElementById('post-toc');
+    var tocClose = document.getElementById('post-toc-close');
+    if (tocBtn && postToc) {
+        tocBtn.addEventListener('click', function () {
+            postToc.classList.add('active');
         });
-  </script>
-  
-
-</article>
-
-    
-<a id="gotop" href="javascript:" rel="external nofollow noreferrer" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
-    
-
-
-
-
-
-
-    
-<div id="bottom-outer">
-    <div id="bottom-inner">
-        © 2020 <i class="fa fa-heart" id="heart"></i> xyiling 
-        <br>
-        Powered by 
-        <a target="_blank" rel="noopener external nofollow noreferrer" href="http://hexo.io">hexo</a> | Theme is <a href="https://github.com/a2396837/hexo-theme-blank/">blank</a>
-        
-          <div class="icp-info">
-            
-          <a href="" target="_blank"> </a>
-        </div>
-        
-    </div>  
-  </div>
-  
-<script src="https://cdn.jsdelivr.net/npm/layui-src@2.5.5/dist/layui.min.js"></script>
-
-
-
-  
-    <script src="/xyiling/xyiling.github.io/js/script.js"></script>
-  
-    <script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
-  
-
- 
-
-  <script src="/xyiling/xyiling.github.io/js/local-search.js"></script>
-<script type="text/javascript">      
-  var search_path = "search.json";
-if (search_path.length == 0) {
-  search_path = "search.xml";
-}
-var path = "/xyiling/xyiling.github.io/" + search_path;
-  searchFunc(path, 'local-search-input', 'local-search-result');
-</script>
-  
-
-
-  <script>
-    window.lazyLoadOptions = {
-      elements_selector: 'img',
-      threshold: 0
+        tocClose.addEventListener('click', function () {
+            postToc.classList.remove('active');
+        });
+        Array.from(document.getElementsByClassName('toc-link')).forEach(function (el) {
+            el.addEventListener('click', function () {
+                postToc.classList.remove('active');
+            });
+        });
     }
-</script>
-<script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script>   
-  
-
-
-  <script>
-    var images = $('img').not('.nav-logo img').not('.card img').not($('a>img')).not('.reward-content img')
-    images.each(function (i, o) {
-      var lazyloadSrc = $(o).attr('data-src') ? $(o).attr('data-src') : $(o).attr('src')
-      $(o).wrap(`<a href="${lazyloadSrc}" data-fancybox="group" data-caption="${$(o).attr('alt')}" class="fancybox"></a>`)
-    })
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script>
-  <script>
-        $().fancybox({
-      selector: '[data-fancybox]',
-      loop: true,
-      transitionEffect: 'slide',
-      protect: true,
-      buttons: ['slideShow', 'fullScreen', 'thumbs', 'close']
-    })
-  </script>   
-  
-
-
-
-
-
-
-  <script>
-    jQuery(document).ready(function () {
-      var QRBox = $('#QRBox');
-      var MainBox = $('#MainBox');
-      var AliPayQR = '/img/alipay.jpg';
-      var WeChanQR = '/img/wechat.jpg';
-
-      function showQR(QR) {
-        if (QR) {
-          MainBox.css('background-image', 'url(' + QR + ')');
-        }
-        $('#donateBox').addClass('blur');
-        QRBox.fadeIn(300, function (argument) {
-          MainBox.addClass('showQR');
-        });
-      }
-
-      $('#donateBox>li').click(function (event) {
-        var thisID = $(this).attr('id');
-        if (thisID === 'AliPay') {
-          showQR(AliPayQR);
-        } else if (thisID === 'WeChat') {
-          showQR(WeChanQR);
-        }
-      });
-
-      MainBox.click(function (event) {
-        MainBox.removeClass('showQR').addClass('hideQR');
-        setTimeout(function (a) {
-          QRBox.fadeOut(300, function (argument) {
-            MainBox.removeClass('hideQR');
-          });
-          $('#DonateText,#donateBox,#github').removeClass('blur');
-        }, 600);
-
-      });
-    });
-  </script>
-  
-
-
-
-
-  <script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script>
-  
-
-
-
-
-  
-<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js"></script>
-<script>
-!function (e, t, a) {
-  var initCopyCode = function(){
-    var copyHtml = '';
-    copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-    copyHtml += '  <i class="fa fa-clipboard"></i><span>复制</span>';
-    copyHtml += '</button>';
-    $(".highlight .code pre").before(copyHtml);
-    new ClipboardJS('.btn-copy', {
-      target: function(trigger) {
-        return trigger.nextElementSibling;
-      }
-    });
-  }
-  initCopyCode();
-}(window, document);
-</script>  
-  
-
-<script>
-  var btntop = $('#gotop');
-  btntop.on('click', function (e) {
-    e.preventDefault();
-    $('html, body').animate({ scrollTop: 0 }, '300');
-  });
-
-  var $table = $('.content table').not($('figure.highlight > table'))
-$table.each(function () {
-  $(this).wrap('<div class="table-wrap"></div>')
-})
+});
 </script>
 
+                <div class="site-footer gt-c-content-color-first">
+    <div class="footer-main">
+        <!-- 建议保留版权信息或者添加主题信息到友链，感谢您的理解 -->
+        <!-- 文件位置：layout/_includes/footer.ejs -->
+        <span style="text-align: right; float: right;">Theme <a 
+            href="https://github.com/renbaoshuo/hexo-theme-pure" target="_blank">Pure</a> | Powered by <a 
+            href="https://hexo.io" target="_blank">Hexo</a></span>
+        <span style="text-align: left;">Footer HTML
+</span>
+    </div>
+</div>
 
+<!-- Buttons -->
+<div class="fab">
+    
+    <a aria-label="文章目录" class="fab-btn" id="toc-btn" href="javascript:;" rel="external nofollow noreferrer" title="文章目录">
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+            focusable="false"
+            data-icon="list-ul"
+            class="svg-inline--fa fa-list-ul fa-w-16"
+            role="img"
+            viewBox="0 0 512 512"
+            height="20"
+            width="20"
+        >
+            <path
+                fill="currentColor"
+                d="M48 48a48 48 0 1 0 48 48 48 48 0 0 0-48-48zm0 160a48 48 0 1 0 48 48 48 48 0 0 0-48-48zm0 160a48 48 0 1 0 48 48 48 48 0 0 0-48-48zm448 16H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16z"
+            />
+        </svg>
+    </a>
+    
+    <a aria-label="回到顶部" class="fab-btn" href="#" title="回到顶部">
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+            focusable="false"
+            role="img"
+            viewBox="0 0 320 512"
+            height="20"
+            width="20"
+        >
+            <path
+                fill="currentColor"
+                d="M168.5 164.2l148 146.8c4.7 4.7 4.7 12.3 0 17l-19.8 19.8c-4.7 4.7-12.3 4.7-17 0L160 229.3 40.3 347.8c-4.7 4.7-12.3 4.7-17 0L3.5 328c-4.7-4.7-4.7-12.3 0-17l148-146.8c4.7-4.7 12.3-4.7 17 0z"
+            />
+        </svg>
+    </a>
+</div>
 
+            </div>
+        </div>
+    
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
 </html>

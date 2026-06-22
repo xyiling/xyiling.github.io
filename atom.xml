@@ -10,13 +10,13 @@
   <rights>All rights reserved 2026, xyiling</rights>
   <subtitle>keep learning</subtitle>
   <title>xyiling's blogs</title>
-  <updated>2026-06-22T10:30:21.773Z</updated>
+  <updated>2026-06-22T10:31:45.755Z</updated>
   <entry>
     <author>
       <name>xyiling</name>
     </author>
     <content>
-      <![CDATA[<p>pandas笔记：</p><ol><li>过滤</li></ol><p>num_mask = df[‘num_col’]==num_val<br>str_mask = df[‘str_col’]==‘str_val’<br>filtered_df = df[num_mask &amp; str_mask]</p><ol start="2"><li>拼接<br>pd.concat([list1, list2, …])</li><li>填充</li><li>重采样</li><li>性能优化</li></ol><p>Q:</p><ol><li>索引有啥重要作用？</li><li></li></ol><p>hello <a href="https://github.com/xyiling/xyiling.github.io/posts/undefined.html">https://github.com/xyiling/xyiling.github.io/posts/undefined.html</a> bye</p>]]>
+      <![CDATA[<p>pandas笔记：</p><ol><li>过滤</li></ol><p>num_mask = df[‘num_col’]==num_val<br>str_mask = df[‘str_col’]==‘str_val’<br>filtered_df = df[num_mask &amp; str_mask]</p><ol start="2"><li>拼接<br>pd.concat([list1, list2, …])</li><li>填充</li><li>重采样</li><li>性能优化</li></ol><p>Q:</p><ol><li>索引有啥重要作用？</li><li></li></ol><p>hello <a href="https://github.com/xyiling/xyiling.github.io/posts/eaac5978.html">https://github.com/xyiling/xyiling.github.io/posts/eaac5978.html</a> bye</p>]]>
     </content>
     <id>https://github.com/xyiling/xyiling.github.io/posts/eaac5978.html</id>
     <link href="https://github.com/xyiling/xyiling.github.io/posts/eaac5978.html"/>
@@ -31,14 +31,14 @@ str_mask = df[‘str_col’]==‘str_val’<br>
 filtered_df = df[nu]]>
     </summary>
     <title>pandas学习笔记</title>
-    <updated>2026-06-22T10:30:21.773Z</updated>
+    <updated>2026-06-22T10:31:45.755Z</updated>
   </entry>
   <entry>
     <author>
       <name>xyiling</name>
     </author>
     <content>
-      <![CDATA[<p>数据竞争：</p><ol><li>多个进程操作同一个文件/多个线程操作同一个文件或变量</li><li>至少1个写进程</li><li>没有良好的互斥条件</li></ol><p>rust支持对一个mut变量创建引用，但是不支持既创建可变引用，又创建不可变引用<br>但是可以在不可变引用结束所有访问之后，再创建可变引用，因为后续的改变不会影响前面的读数</p><p>hello <a href="https://github.com/xyiling/xyiling.github.io/posts/undefined.html">https://github.com/xyiling/xyiling.github.io/posts/undefined.html</a> bye</p>]]>
+      <![CDATA[<p>数据竞争：</p><ol><li>多个进程操作同一个文件/多个线程操作同一个文件或变量</li><li>至少1个写进程</li><li>没有良好的互斥条件</li></ol><p>rust支持对一个mut变量创建引用，但是不支持既创建可变引用，又创建不可变引用<br>但是可以在不可变引用结束所有访问之后，再创建可变引用，因为后续的改变不会影响前面的读数</p><p>hello <a href="https://github.com/xyiling/xyiling.github.io/posts/c41d46de.html">https://github.com/xyiling/xyiling.github.io/posts/c41d46de.html</a> bye</p>]]>
     </content>
     <id>https://github.com/xyiling/xyiling.github.io/posts/c41d46de.html</id>
     <link href="https://github.com/xyiling/xyiling.github.io/posts/c41d46de.html"/>
@@ -53,14 +53,14 @@ filtered_df = df[nu]]>
 <p>rust支持对一个mut变量创建引用，但是不支持既创建可变引用，又创建不可变引用<]]>
     </summary>
     <title>初步学习rust语言</title>
-    <updated>2026-06-22T10:29:44.813Z</updated>
+    <updated>2026-06-22T10:31:45.756Z</updated>
   </entry>
   <entry>
     <author>
       <name>xyiling</name>
     </author>
     <content>
-      <![CDATA[<p>针对ThreadPoolExecutor(10)</p><ol><li>设置核心线程数：10</li><li>设置最大线程数：10</li><li>设置等待队列：Integer.MAX_VALUE，即21亿，list过大时造成OOM</li></ol><blockquote><p>核心线程数满了，新的业务会给到队列，队列满了会增加核心线程数量，知道核心线程数等于最大线程数<br>为什么不先扩大核心线程数，到了最大线程数，新的再交给队列？</p><ol><li>cpu数量有限，正在执行的线程多了会引起更多的上下文切换，可能导致更低的性能，先交给队列，可以保证性能不变等。</li></ol></blockquote><ol><li>核心线程数</li><li>最大线程数</li><li>队列大小</li><li>idle线程的存活时间（超过则杀死这个线程）(非核心线程不会回收)</li><li>unit存活时间的单位，如秒、毫秒</li><li>线程工厂：用来设置线程名字，否则只能看到pool-1-thread-1/2/3，可以设置为order-thread-1/2/3，log-thread-1/2/3</li><li>拒绝策略：线程池和队列都满了，采取的处理方式</li></ol><p>cpu密集型：核心线程数=N+1(请求处理很快，N+1可以减少cpu上下文切换的次数)<br>io密集型：核心线程数=2N（io任务时间长，通过切换cpu，可以短时间处理更多的请求，io交给后台（如DMA直接内存访问、io uring、epoll等））</p><p>hello <a href="https://github.com/xyiling/xyiling.github.io/posts/undefined.html">https://github.com/xyiling/xyiling.github.io/posts/undefined.html</a> bye</p>]]>
+      <![CDATA[<p>针对ThreadPoolExecutor(10)</p><ol><li>设置核心线程数：10</li><li>设置最大线程数：10</li><li>设置等待队列：Integer.MAX_VALUE，即21亿，list过大时造成OOM</li></ol><blockquote><p>核心线程数满了，新的业务会给到队列，队列满了会增加核心线程数量，知道核心线程数等于最大线程数<br>为什么不先扩大核心线程数，到了最大线程数，新的再交给队列？</p><ol><li>cpu数量有限，正在执行的线程多了会引起更多的上下文切换，可能导致更低的性能，先交给队列，可以保证性能不变等。</li></ol></blockquote><ol><li>核心线程数</li><li>最大线程数</li><li>队列大小</li><li>idle线程的存活时间（超过则杀死这个线程）(非核心线程不会回收)</li><li>unit存活时间的单位，如秒、毫秒</li><li>线程工厂：用来设置线程名字，否则只能看到pool-1-thread-1/2/3，可以设置为order-thread-1/2/3，log-thread-1/2/3</li><li>拒绝策略：线程池和队列都满了，采取的处理方式</li></ol><p>cpu密集型：核心线程数=N+1(请求处理很快，N+1可以减少cpu上下文切换的次数)<br>io密集型：核心线程数=2N（io任务时间长，通过切换cpu，可以短时间处理更多的请求，io交给后台（如DMA直接内存访问、io uring、epoll等））</p><p>hello <a href="https://github.com/xyiling/xyiling.github.io/posts/c8690aa5.html">https://github.com/xyiling/xyiling.github.io/posts/c8690aa5.html</a> bye</p>]]>
     </content>
     <id>https://github.com/xyiling/xyiling.github.io/posts/c8690aa5.html</id>
     <link href="https://github.com/xyiling/xyiling.github.io/posts/c8690aa5.html"/>
@@ -75,25 +75,25 @@ filtered_df = df[nu]]>
 <bloc]]>
     </summary>
     <title>了解java线程池核心参数</title>
-    <updated>2026-06-22T09:59:34.143Z</updated>
+    <updated>2026-06-22T10:31:45.755Z</updated>
   </entry>
   <entry>
     <author>
       <name>xyiling</name>
     </author>
     <content>
-      <![CDATA[<div style="width: 300;margin: 0 auto">    <canvas id="chart761" style="height: 200px"></canvas></div><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script><script type="text/javascript">    var ctx = document.getElementById('chart761').getContext('2d');    var options =                                                        {                                                                             type: 'bar',                                                                data: {                                                                     labels: ['A','B','C'],                                                    datasets: [{ data: [10,20,30] }]                                          }                                                                       }                                                                         ;    new Chart(ctx, options);</script><div id="echarts249" style="width: 300;height: 400px;margin: 0 auto"></div><script type="text/javascript">        // 基于准备好的dom，初始化echarts实例        var myChart = echarts.init(document.getElementById('echarts249'));        // 指定图表的配置项和数据        var option =                                                      {                                                                             xAxis: { type: 'category', data: ['Mon','Tue','Wed'] },                     yAxis: { type: 'value' },                                                   series: [{ data: [120, 200, 150], type: 'bar' }]                        }                                                                                 // 使用刚指定的配置项和数据显示图表。        myChart.setOption(option);</script> <p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start">Quick Start</h2><h3 id="Create-a-new-post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p><p>hello <a href="https://github.com/xyiling/xyiling.github.io/posts/undefined.html">https://github.com/xyiling/xyiling.github.io/posts/undefined.html</a> bye</p>]]>
+      <![CDATA[<div style="width: 300;margin: 0 auto">    <canvas id="chart8613" style="height: 200px"></canvas></div><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script><script type="text/javascript">    var ctx = document.getElementById('chart8613').getContext('2d');    var options =                                                        {                                                                             type: 'bar',                                                                data: {                                                                     labels: ['A','B','C'],                                                    datasets: [{ data: [10,20,30] }]                                          }                                                                       }                                                                         ;    new Chart(ctx, options);</script><div id="echarts641" style="width: 300;height: 400px;margin: 0 auto"></div><script type="text/javascript">        // 基于准备好的dom，初始化echarts实例        var myChart = echarts.init(document.getElementById('echarts641'));        // 指定图表的配置项和数据        var option =                                                      {                                                                             xAxis: { type: 'category', data: ['Mon','Tue','Wed'] },                     yAxis: { type: 'value' },                                                   series: [{ data: [120, 200, 150], type: 'bar' }]                        }                                                                                 // 使用刚指定的配置项和数据显示图表。        myChart.setOption(option);</script> <p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start">Quick Start</h2><h3 id="Create-a-new-post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p><p>hello <a href="https://github.com/xyiling/xyiling.github.io/posts/4a17b156.html">https://github.com/xyiling/xyiling.github.io/posts/4a17b156.html</a> bye</p>]]>
     </content>
     <id>https://github.com/xyiling/xyiling.github.io/posts/4a17b156.html</id>
     <link href="https://github.com/xyiling/xyiling.github.io/posts/4a17b156.html"/>
     <published>2026-06-22T09:44:22.608Z</published>
     <summary>
       <![CDATA[<div style="width: 300;margin: 0 auto">
-    <canvas id="chart761" style="height: 200px"></canvas>
+    <canvas id="chart8613" style="height: 200px"></canvas>
 </div>
-<script src="https://cdn.jsdelivr.n]]>
+<script src="https://cdn.jsdelivr.]]>
     </summary>
     <title>Hello World</title>
-    <updated>2026-06-22T10:01:21.521Z</updated>
+    <updated>2026-06-22T10:31:45.753Z</updated>
   </entry>
 </feed>
