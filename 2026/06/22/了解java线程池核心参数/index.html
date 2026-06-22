@@ -4,32 +4,32 @@
   <meta charset="utf-8">
   
   
-  <title>了解java线程池核心参数 | Hexo</title>
+  <title>了解java线程池核心参数 | xyiling&#39;s blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="针对ThreadPoolExecutor(10)  设置核心线程数：10 设置最大线程数：10 设置等待队列：Integer.MAX_VALUE，即21亿，list过大时造成OOM   核心线程数满了，新的业务会给到队列，队列满了会增加核心线程数量，知道核心线程数等于最大线程数 为什么不先扩大核心线程数，到了最大线程数，新的再交给队列？  cpu数量有限，正在执行的线程多了会引起更多的上下文切换，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="了解java线程池核心参数">
-<meta property="og:url" content="http://example.com/2026/06/22/%E4%BA%86%E8%A7%A3java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%A0%B8%E5%BF%83%E5%8F%82%E6%95%B0/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:url" content="https://github.com/xyiling/xyiling.github.io/2026/06/22/%E4%BA%86%E8%A7%A3java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%A0%B8%E5%BF%83%E5%8F%82%E6%95%B0/index.html">
+<meta property="og:site_name" content="xyiling&#39;s blogs">
 <meta property="og:description" content="针对ThreadPoolExecutor(10)  设置核心线程数：10 设置最大线程数：10 设置等待队列：Integer.MAX_VALUE，即21亿，list过大时造成OOM   核心线程数满了，新的业务会给到队列，队列满了会增加核心线程数量，知道核心线程数等于最大线程数 为什么不先扩大核心线程数，到了最大线程数，新的再交给队列？  cpu数量有限，正在执行的线程多了会引起更多的上下文切换，">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-06-22T09:45:16.000Z">
 <meta property="article:modified_time" content="2026-06-22T09:59:34.143Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="xyiling">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/xyiling/xyiling.github.io/atom.xml" title="xyiling's blogs" type="application/atom+xml">
   
   
-    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="shortcut icon" href="/xyiling/xyiling.github.io/favicon.png">
   
   
   
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/xyiling/xyiling.github.io/css/style.css">
 
   
     
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+<link rel="stylesheet" href="/xyiling/xyiling.github.io/fancybox/jquery.fancybox.min.css">
 
   
   
@@ -45,28 +45,32 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
+        <a href="/xyiling/xyiling.github.io/" id="logo">xyiling&#39;s blogs</a>
       </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/xyiling/xyiling.github.io/" id="subtitle">keep learning</a>
+        </h2>
       
     </div>
     <div id="header-inner" class="inner">
       <nav id="main-nav">
         <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
         
-          <a class="main-nav-link" href="/">Home</a>
+          <a class="main-nav-link" href="/xyiling/xyiling.github.io/">Home</a>
         
-          <a class="main-nav-link" href="/archives">Archives</a>
+          <a class="main-nav-link" href="/xyiling/xyiling.github.io/archives">Archives</a>
         
       </nav>
       <nav id="sub-nav">
         
         
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+          <a class="nav-icon" href="/xyiling/xyiling.github.io/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
         
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/xyiling/xyiling.github.io"></form>
       </div>
     </div>
   </div>
@@ -75,7 +79,7 @@
       <div class="outer">
         <section id="main"><article id="post-了解java线程池核心参数" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2026/06/22/%E4%BA%86%E8%A7%A3java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%A0%B8%E5%BF%83%E5%8F%82%E6%95%B0/" class="article-date">
+    <a href="/xyiling/xyiling.github.io/2026/06/22/%E4%BA%86%E8%A7%A3java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%A0%B8%E5%BF%83%E5%8F%82%E6%95%B0/" class="article-date">
   <time class="dt-published" datetime="2026-06-22T09:45:16.000Z" itemprop="datePublished">2026-06-22</time>
 </a>
     
@@ -123,7 +127,7 @@ io密集型：核心线程数=2N（io任务时间长，通过切换cpu，可以�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/06/22/%E4%BA%86%E8%A7%A3java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%A0%B8%E5%BF%83%E5%8F%82%E6%95%B0/" data-id="cuidyrSuyjZ72leGzwCsSC_3j" data-title="了解java线程池核心参数" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://github.com/xyiling/xyiling.github.io/2026/06/22/%E4%BA%86%E8%A7%A3java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%A0%B8%E5%BF%83%E5%8F%82%E6%95%B0/" data-id="cuidvgMhNKDEvodTQfwH3w-3C" data-title="了解java线程池核心参数" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -134,8 +138,8 @@ io密集型：核心线程数=2N（io任务时间长，通过切换cpu，可以�
 <nav id="article-nav">
   
   
-    <a href="/2026/06/22/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+    <a href="/xyiling/xyiling.github.io/2026/06/22/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
       <div class="article-nav-title">Hello World</div>
     </a>
   
@@ -159,9 +163,9 @@ io密集型：核心线程数=2N（io任务时间长，通过切换cpu，可以�
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/06/">June 2026</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/xyiling/xyiling.github.io/archives/2026/06/">六月 2026</a></li></ul>
     </div>
   </div>
 
@@ -169,16 +173,16 @@ io密集型：核心线程数=2N（io任务时间长，通过切换cpu，可以�
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
         
           <li>
-            <a href="/2026/06/22/%E4%BA%86%E8%A7%A3java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%A0%B8%E5%BF%83%E5%8F%82%E6%95%B0/">了解java线程池核心参数</a>
+            <a href="/xyiling/xyiling.github.io/2026/06/22/%E4%BA%86%E8%A7%A3java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%A0%B8%E5%BF%83%E5%8F%82%E6%95%B0/">了解java线程池核心参数</a>
           </li>
         
           <li>
-            <a href="/2026/06/22/hello-world/">Hello World</a>
+            <a href="/xyiling/xyiling.github.io/2026/06/22/hello-world/">Hello World</a>
           </li>
         
       </ul>
@@ -194,7 +198,7 @@ io密集型：核心线程数=2N（io任务时间长，通过切换cpu，可以�
   <div class="outer">
     <div id="footer-info" class="inner">
       
-      &copy; 2026 John Doe<br>
+      &copy; 2026 xyiling<br>
       Powered by <a href="https://hexo.io/" rel="external nofollow noreferrer" target="_blank">Hexo</a>
     </div>
   </div>
@@ -203,25 +207,25 @@ io密集型：核心线程数=2N（io任务时间长，通过切换cpu，可以�
     </div>
     <nav id="mobile-nav">
   
-    <a href="/" class="mobile-nav-link">Home</a>
+    <a href="/xyiling/xyiling.github.io/" class="mobile-nav-link">Home</a>
   
-    <a href="/archives" class="mobile-nav-link">Archives</a>
+    <a href="/xyiling/xyiling.github.io/archives" class="mobile-nav-link">Archives</a>
   
 </nav>
     
 
 
-<script src="/js/jquery-3.6.4.min.js"></script>
+<script src="/xyiling/xyiling.github.io/js/jquery-3.6.4.min.js"></script>
 
 
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
+<script src="/xyiling/xyiling.github.io/fancybox/jquery.fancybox.min.js"></script>
 
 
 
 
-<script src="/js/script.js"></script>
+<script src="/xyiling/xyiling.github.io/js/script.js"></script>
 
 
 
