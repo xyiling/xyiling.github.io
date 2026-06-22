@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <author>
+    <name>John Doe</name>
+  </author>
+  <generator uri="https://hexo.io/">Hexo</generator>
+  <id>http://example.com/</id>
+  <link href="http://example.com/" rel="alternate"/>
+  <link href="http://example.com/atom.xml" rel="self"/>
+  <rights>All rights reserved 2026, John Doe</rights>
+  <title>Hexo</title>
+  <updated>2026-06-22T09:59:34.143Z</updated>
+  <entry>
+    <author>
+      <name>John Doe</name>
+    </author>
+    <content>
+      <![CDATA[<p>针对ThreadPoolExecutor(10)</p><ol><li>设置核心线程数：10</li><li>设置最大线程数：10</li><li>设置等待队列：Integer.MAX_VALUE，即21亿，list过大时造成OOM</li></ol><blockquote><p>核心线程数满了，新的业务会给到队列，队列满了会增加核心线程数量，知道核心线程数等于最大线程数<br>为什么不先扩大核心线程数，到了最大线程数，新的再交给队列？</p><ol><li>cpu数量有限，正在执行的线程多了会引起更多的上下文切换，可能导致更低的性能，先交给队列，可以保证性能不变等。</li></ol></blockquote><ol><li>核心线程数</li><li>最大线程数</li><li>队列大小</li><li>idle线程的存活时间（超过则杀死这个线程）(非核心线程不会回收)</li><li>unit存活时间的单位，如秒、毫秒</li><li>线程工厂：用来设置线程名字，否则只能看到pool-1-thread-1/2/3，可以设置为order-thread-1/2/3，log-thread-1/2/3</li><li>拒绝策略：线程池和队列都满了，采取的处理方式</li></ol><p>cpu密集型：核心线程数=N+1(请求处理很快，N+1可以减少cpu上下文切换的次数)<br>io密集型：核心线程数=2N（io任务时间长，通过切换cpu，可以短时间处理更多的请求，io交给后台（如DMA直接内存访问、io uring、epoll等））</p>]]>
+    </content>
+    <id>http://example.com/2026/06/22/%E4%BA%86%E8%A7%A3java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%A0%B8%E5%BF%83%E5%8F%82%E6%95%B0/</id>
+    <link href="http://example.com/2026/06/22/%E4%BA%86%E8%A7%A3java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%A0%B8%E5%BF%83%E5%8F%82%E6%95%B0/"/>
+    <published>2026-06-22T09:45:16.000Z</published>
+    <summary>
+      <![CDATA[<p>针对ThreadPoolExecutor(10)</p>
+<ol>
+<li>设置核心线程数：10</li>
+<li>设置最大线程数：10</li>
+<li>设置等待队列：Integer.MAX_VALUE，即21亿，list过大时造成OOM</li>
+</ol>
+<bloc]]>
+    </summary>
+    <title>了解java线程池核心参数</title>
+    <updated>2026-06-22T09:59:34.143Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>John Doe</name>
+    </author>
+    <content>
+      <![CDATA[<div style="width: 300;margin: 0 auto">    <canvas id="chart960" style="height: 200px"></canvas></div><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script><script type="text/javascript">    var ctx = document.getElementById('chart960').getContext('2d');    var options =                                                        {                                                                             type: 'bar',                                                                data: {                                                                     labels: ['A','B','C'],                                                    datasets: [{ data: [10,20,30] }]                                          }                                                                       }                                                                         ;    new Chart(ctx, options);</script><div id="echarts7121" style="width: 300;height: 400px;margin: 0 auto"></div><script type="text/javascript">        // 基于准备好的dom，初始化echarts实例        var myChart = echarts.init(document.getElementById('echarts7121'));        // 指定图表的配置项和数据        var option =                                                      {                                                                             xAxis: { type: 'category', data: ['Mon','Tue','Wed'] },                     yAxis: { type: 'value' },                                                   series: [{ data: [120, 200, 150], type: 'bar' }]                        }                                                                                 // 使用刚指定的配置项和数据显示图表。        myChart.setOption(option);</script> <p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start">Quick Start</h2><h3 id="Create-a-new-post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]>
+    </content>
+    <id>http://example.com/2026/06/22/hello-world/</id>
+    <link href="http://example.com/2026/06/22/hello-world/"/>
+    <published>2026-06-22T09:44:22.608Z</published>
+    <summary>
+      <![CDATA[<div style="width: 300;margin: 0 auto">
+    <canvas id="chart960" style="height: 200px"></canvas>
+</div>
+<script src="https://cdn.jsdelivr.n]]>
+    </summary>
+    <title>Hello World</title>
+    <updated>2026-06-22T10:01:21.521Z</updated>
+  </entry>
+</feed>
