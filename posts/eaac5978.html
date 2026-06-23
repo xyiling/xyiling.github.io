@@ -91,7 +91,7 @@
                 <time class="post-time gt-c-content-color-first">
                     · 2026-06-22 ·</time>
                 <span class="post-wordcount gt-c-content-color-second">
-                    213 字 ·</span>
+                    357 字 ·</span>
                 
                     
                 
@@ -102,12 +102,12 @@
 <ol>
 <li>过滤</li>
 </ol>
-<p>num_mask = df[‘num_col’]==num_val<br>
-str_mask = df[‘str_col’]==‘str_val’<br>
-filtered_df = df[num_mask &amp; str_mask]</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">num_mask = df[<span class="string">&#x27;num_col&#x27;</span>]==num_val</span><br><span class="line">str_mask = df[<span class="string">&#x27;str_col&#x27;</span>]==<span class="string">&#x27;str_val&#x27;</span></span><br><span class="line">filtered_df = df[num_mask &amp; str_mask]</span><br></pre></td></tr></table></figure>
 <ol start="2">
-<li>拼接<br>
-pd.concat([list1, list2, …])</li>
+<li>拼接</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.concat([list1, list2, ...])</span><br></pre></td></tr></table></figure>
+<ol start="3">
 <li>填充</li>
 <li>重采样</li>
 <li>性能优化</li>
@@ -115,9 +115,12 @@ pd.concat([list1, list2, …])</li>
 <p>Q:</p>
 <ol>
 <li>索引有啥重要作用？</li>
-<li></li>
 </ol>
-<p>hello <a href="https://xyiling.github.io/posts/eaac5978.html">https://xyiling.github.io/posts/eaac5978.html</a> bye</p>
+<p>pandas支持两个行坐标访问方式，分别是loc和iloc，访问过滤后的df有不同的行为：<br>
+- df.loc[1]访问索引值为1的数据，如果某个切片没有索引值为1的数据，pandas会抛出异常。<br>
+- df.iloc[1]访问第2行的数据<br>
+2.</p>
+<p><a href="https://xyiling.github.io/posts/eaac5978.html">https://xyiling.github.io/posts/eaac5978.html</a></p>
 
             </div>
         </article>
